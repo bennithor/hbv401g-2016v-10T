@@ -1,8 +1,5 @@
 package hotelSearch;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -25,7 +22,7 @@ public class DBManager {
 
 		try {
 			Class.forName("org.sqlite.JDBC");
-			c = DriverManager.getConnection("jdbc:sqlite:D:\\HotelSearch.db");
+			c = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\Public\\HotelSearch.db");
 			//System.out.println("Opened database successfully");
 			stmt = c.createStatement();
 			//String sql = "Select * from Hotels, Rooms where Hotels.Id = Rooms.HotelId;";
@@ -105,7 +102,7 @@ public class DBManager {
 		int[] count = {0,0,0,0};
 		try {
 			Class.forName("org.sqlite.JDBC");
-			c = DriverManager.getConnection("jdbc:sqlite:D:\\HotelSearch.db");
+			c = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\Public\\HotelSearch.db");
 			stmt = c.createStatement();
 			String sql = "Select * from Rooms where hotelID="+HotelID+";";
 			ResultSet rs = stmt.executeQuery(sql);
@@ -149,7 +146,7 @@ public class DBManager {
 		Statement stmt = null;
 		try {
 			Class.forName("org.sqlite.JDBC");
-			c = DriverManager.getConnection("jdbc:sqlite:D:\\HotelSearch.db");
+			c = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\Public\\HotelSearch.db");
 			stmt = c.createStatement();
 			String sql = "Select * from Rooms where Id="+RoomID+";";
 			ResultSet rs = stmt.executeQuery(sql);
@@ -186,7 +183,7 @@ public class DBManager {
 		else{
 			try{
 				Class.forName("org.sqlite.JDBC");
-				c = DriverManager.getConnection("jdbc:sqlite:D:\\HotelSearch.db");
+				c = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\Public\\HotelSearch.db");
 				c.setAutoCommit(false);
 				stmt = c.createStatement();
 				for(int i = 0; i<roomAmount.length;i++){
