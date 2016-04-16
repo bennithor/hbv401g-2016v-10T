@@ -1,5 +1,6 @@
 package hotelSearch;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -7,7 +8,7 @@ import java.util.Date;
 
 
 //Athuga, daemi um notkun er i main fallinu, thar eru leidbeiningar um notkun.
-class UserInterface {
+public class UserInterface {
 	// field, constructor, and 
 	// method declarations
 	Hotel hotel;
@@ -40,7 +41,7 @@ class UserInterface {
 	//Eftir:
 	//	Fallid skilar array af hotel objectum sem uppfylla leitarkrofurnar
 	public Hotel[] searchHotel(String date, int nrOfNights, String loc, String name, int stars,
-			int maxPrice, int[] roomAmounts) throws ParseException{
+			int maxPrice, int[] roomAmounts) throws ParseException, IOException{
 		HotelManager manager = new HotelManager();
 
 		int dateInt = (int) convertDate(date);
@@ -82,14 +83,15 @@ class UserInterface {
 
 	//Breytir date streng  í numer dags frí 1 jan 2016 af tagi long.
 	public long convertDate(String date) throws ParseException{
+		System.out.println(date);
 		DateFormat df = new SimpleDateFormat("yyyyMMdd");
 		Date d = df.parse(date);
 		int dateInt = (int) (d.getTime()/ (24 * 60 * 60 * 1000)-16800);
 		return dateInt;
 	}
 
-
 /*
+
 	public static  void main(String[] args) throws ParseException{
 
 		//Daemi um notkun:
@@ -141,6 +143,5 @@ class UserInterface {
 
 			
 	}	*/
-	
 
 }

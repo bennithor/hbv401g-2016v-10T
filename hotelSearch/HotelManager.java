@@ -1,9 +1,11 @@
 package hotelSearch;
 
+import java.io.IOException;
+
 public class HotelManager {
 
 	public Hotel[] searchHotel(int date, int nrOfNights, String Loc, String name,
-									int stars, int MaxPrice, int[] roomAmounts){
+									int stars, int MaxPrice, int[] roomAmounts) throws IOException{
 		DBManager dbsearch = new DBManager();
 		Hotel[] foundHotels = dbsearch.searchHotel(date, nrOfNights, Loc, name, stars, MaxPrice, roomAmounts);
 		return foundHotels;

@@ -1,4 +1,5 @@
 package trips01;
+import hotelSearch.*;
 
 public class TripLogic {
 
@@ -11,6 +12,7 @@ public class TripLogic {
 	private DayToursData dayTourSearch;
 	private TripData[] trips = new TripData[1];
 	private int numberOfPeople;
+	private hotelSearch.UserInterface hotelSession;
 
 	
 	public void generateTrips() {
@@ -21,9 +23,9 @@ public class TripLogic {
 		flightSearch.setDate(endDate);
 		trips[0].setFromIceland(flightSearch.findFlights());
 		String[] hotels  = new String[2];
-		hotels[0] = hotelSearch.findHotels();
+		//hotels[0] = hotelSearch.findHotels();
 		hotelSearch.setDate(endDate);
-		hotels[1] = hotelSearch.findHotels();
+		//hotels[1] = hotelSearch.findHotels();
 		trips[0].setHotelsToStay(hotels);
 		String[] tours = new String[2];
 		tours[0] = dayTourSearch.findDayTours();
@@ -44,7 +46,7 @@ public class TripLogic {
 		numberOfPeople = number;
 		
 		flightSearch = new FlightsData(StartDate, location, destination);
-		hotelSearch = new HotelsData(StartDate, destination);
+	//	hotelSearch = new HotelsData(StartDate, destination);
 		dayTourSearch = new DayToursData(StartDate, destination);
 		trips = new TripData[1];
 		

@@ -1,5 +1,8 @@
 package hotelSearch;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -17,11 +20,12 @@ public class DBManager {
 		Statement stmt = null;
 		Hotel [] hotelsFound = new Hotel[200];
 		Hotel [] returnHotels;
+		
 
 
 		try {
 			Class.forName("org.sqlite.JDBC");
-			c = DriverManager.getConnection("jdbc:sqlite:HotelSearch.db");
+			c = DriverManager.getConnection("jdbc:sqlite:D:\\HotelSearch.db");
 			//System.out.println("Opened database successfully");
 			stmt = c.createStatement();
 			//String sql = "Select * from Hotels, Rooms where Hotels.Id = Rooms.HotelId;";
@@ -49,9 +53,11 @@ public class DBManager {
 			if(MaxPrice <0){
 				MaxPrice = Integer.MAX_VALUE;
 			}
+			
+			
 			String sql = "Select * from Hotels where "+ nameString+" AND " +LocationString+" AND "+StarString+ ";";
-
 			ResultSet rs = stmt.executeQuery(sql);
+			
 			int countFound = 0;
 			while ( rs.next() ) {
 				int HotelID = rs.getInt("Id");
@@ -99,7 +105,7 @@ public class DBManager {
 		int[] count = {0,0,0,0};
 		try {
 			Class.forName("org.sqlite.JDBC");
-			c = DriverManager.getConnection("jdbc:sqlite:HotelSearch.db");
+			c = DriverManager.getConnection("jdbc:sqlite:D:\\HotelSearch.db");
 			stmt = c.createStatement();
 			String sql = "Select * from Rooms where hotelID="+HotelID+";";
 			ResultSet rs = stmt.executeQuery(sql);
@@ -143,7 +149,7 @@ public class DBManager {
 		Statement stmt = null;
 		try {
 			Class.forName("org.sqlite.JDBC");
-			c = DriverManager.getConnection("jdbc:sqlite:HotelSearch.db");
+			c = DriverManager.getConnection("jdbc:sqlite:D:\\HotelSearch.db");
 			stmt = c.createStatement();
 			String sql = "Select * from Rooms where Id="+RoomID+";";
 			ResultSet rs = stmt.executeQuery(sql);
@@ -180,7 +186,7 @@ public class DBManager {
 		else{
 			try{
 				Class.forName("org.sqlite.JDBC");
-				c = DriverManager.getConnection("jdbc:sqlite:HotelSearch.db");
+				c = DriverManager.getConnection("jdbc:sqlite:D:\\HotelSearch.db");
 				c.setAutoCommit(false);
 				stmt = c.createStatement();
 				for(int i = 0; i<roomAmount.length;i++){
