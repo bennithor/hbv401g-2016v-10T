@@ -88,6 +88,8 @@ public class Trips extends javax.swing.JFrame {
         threePersLabel = new javax.swing.JLabel();
         fourPersLabel = new javax.swing.JLabel();
         hotelSearchButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        HotelsTable = new javax.swing.JTable();
         dayToursPanel = new javax.swing.JPanel();
         dayToursLabel = new javax.swing.JLabel();
         contButton3 = new javax.swing.JButton();
@@ -115,7 +117,9 @@ public class Trips extends javax.swing.JFrame {
         jRadioButton7 = new javax.swing.JRadioButton();
         jCheckBox1 = new javax.swing.JCheckBox();
         jCheckBox2 = new javax.swing.JCheckBox();
-        jButton1 = new javax.swing.JButton();
+        DayTourSearchButton = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        DayToursTable = new javax.swing.JTable();
         flightPanel = new javax.swing.JPanel();
         flightLabel = new javax.swing.JLabel();
         contButton4 = new javax.swing.JButton();
@@ -379,6 +383,60 @@ public class Trips extends javax.swing.JFrame {
 
         hotelSearchButton.setFont(new java.awt.Font("Microsoft YaHei", 0, 24)); // NOI18N
         hotelSearchButton.setText("Search");
+        hotelSearchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hotelSearchButtonActionPerformed(evt);
+            }
+        });
+
+        HotelsTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Name", "Stars", "Price", "PostalCode", "Selected"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, true, false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(HotelsTable);
 
         javax.swing.GroupLayout hotelPanelLayout = new javax.swing.GroupLayout(hotelPanel);
         hotelPanel.setLayout(hotelPanelLayout);
@@ -401,8 +459,10 @@ public class Trips extends javax.swing.JFrame {
                             .addComponent(hotelSearchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(hotelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(hotelsContainer1)
-                                .addComponent(hotelsContainer2)))))
-                .addContainerGap(1121, Short.MAX_VALUE))
+                                .addComponent(hotelsContainer2)))
+                        .addGap(60, 60, 60)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(609, Short.MAX_VALUE))
         );
         hotelPanelLayout.setVerticalGroup(
             hotelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -410,12 +470,15 @@ public class Trips extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(hotelLabel)
                 .addGap(40, 40, 40)
-                .addComponent(hotelsContainer1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(hotelsContainer2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(hotelSearchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
+                .addGroup(hotelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(hotelPanelLayout.createSequentialGroup()
+                        .addComponent(hotelsContainer1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(hotelsContainer2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(hotelSearchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
                 .addGroup(hotelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(contButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(backButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -589,13 +652,62 @@ public class Trips extends javax.swing.JFrame {
         dayToursContainer2.setLayer(jCheckBox1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dayToursContainer2.setLayer(jCheckBox2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jButton1.setFont(new java.awt.Font("Microsoft YaHei", 0, 24)); // NOI18N
-        jButton1.setText("Search");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        DayTourSearchButton.setFont(new java.awt.Font("Microsoft YaHei", 0, 24)); // NOI18N
+        DayTourSearchButton.setText("Search");
+        DayTourSearchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                DayTourSearchButtonActionPerformed(evt);
             }
         });
+
+        DayToursTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Name", "Price", "Duration", "Description", "Selected"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(DayToursTable);
 
         javax.swing.GroupLayout dayToursPanelLayout = new javax.swing.GroupLayout(dayToursPanel);
         dayToursPanel.setLayout(dayToursPanelLayout);
@@ -603,7 +715,7 @@ public class Trips extends javax.swing.JFrame {
             dayToursPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dayToursPanelLayout.createSequentialGroup()
                 .addGroup(dayToursPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DayTourSearchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(dayToursPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(dayToursPanelLayout.createSequentialGroup()
                             .addGap(15, 15, 15)
@@ -625,25 +737,32 @@ public class Trips extends javax.swing.JFrame {
                             .addGroup(dayToursPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(dayToursContainer1)
                                 .addComponent(dayToursContainer2)))))
-                .addContainerGap(852, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(415, Short.MAX_VALUE))
         );
         dayToursPanelLayout.setVerticalGroup(
             dayToursPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dayToursPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(dayToursLabel)
-                .addGap(136, 136, 136)
-                .addGroup(dayToursPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(dayToursContainer1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(dayToursContainer2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(dayToursPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dayToursPanelLayout.createSequentialGroup()
+                        .addGap(136, 136, 136)
+                        .addGroup(dayToursPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)
+                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(dayToursContainer1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(dayToursContainer2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(DayTourSearchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(dayToursPanelLayout.createSequentialGroup()
+                        .addGap(68, 68, 68)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addComponent(contButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31))
@@ -800,11 +919,14 @@ public class Trips extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox4ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void DayTourSearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DayTourSearchButtonActionPerformed
+     
+    }//GEN-LAST:event_DayTourSearchButtonActionPerformed
 
-   
+    private void hotelSearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hotelSearchButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_hotelSearchButtonActionPerformed
+
 
     
     
@@ -847,12 +969,15 @@ public class Trips extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton DayTourSearchButton;
     private javax.swing.JLabel DayTours;
     private javax.swing.JCheckBox DayToursCheckbox;
+    private javax.swing.JTable DayToursTable;
     private javax.swing.JCheckBox FlightCheckbox;
     private javax.swing.JLabel Flights;
     private javax.swing.JCheckBox HotelCheckbox;
     private javax.swing.JLabel Hotels;
+    private javax.swing.JTable HotelsTable;
     private javax.swing.JLabel SearchQ;
     private javax.swing.JTextField arrivalDate;
     private javax.swing.JLabel arrivalDateLabel;
@@ -879,7 +1004,6 @@ public class Trips extends javax.swing.JFrame {
     private javax.swing.JButton hotelSearchButton;
     private javax.swing.JLayeredPane hotelsContainer1;
     private javax.swing.JLayeredPane hotelsContainer2;
-    private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
@@ -897,6 +1021,8 @@ public class Trips extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton5;
     private javax.swing.JRadioButton jRadioButton6;
     private javax.swing.JRadioButton jRadioButton7;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
