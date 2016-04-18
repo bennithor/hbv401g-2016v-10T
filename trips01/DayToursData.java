@@ -44,6 +44,8 @@ public class DayToursData {
 	}
 	
 	
+	
+	
 	/*
 	public String findDayTours() {
 		if(location.equalsIgnoreCase("Iceland")) {
@@ -59,6 +61,54 @@ public class DayToursData {
 	}
 	*/
 	
+	
+
+	
+	public void setMinPrice(int price) {
+		minPrice = price;
+	}
+	
+	public void setMaxPrice(int price) {
+		maxPrice = price;
+	}
+	
+	public void setAgeRestriction(int age) {
+		ageRestriction = age;
+	}
+	
+	public void setLocation(String loc) {
+		location = loc;
+	}
+	
+	public void setStars(double rate) {
+		stars = rate;
+	}
+	
+	public void setDepartureTime(String time) {
+		departureTime = time;
+	}
+	
+	public void setSeatsAvailable(int seats) {
+		seatsAvailable = seats;
+	}
+	
+	public void setDaysOfWeek(boolean[] days) {
+		daysOfWeek = days;
+	}
+	
+	public DayToursData(int _searchBy) {
+		minPrice = 0;
+		maxPrice = 0;
+		ageRestriction = 0;
+		location = "null";
+		departureTime = "null";
+		seatsAvailable = 0;
+		daysOfWeek = new boolean[7];
+		for (int i = 0; i<7; i++){
+			daysOfWeek[i] = false;
+		}
+		searchBy = _searchBy;
+	}
 	
 	public DayToursData(int _minPrice, int _maxPrice, int _ageRestriction, String _loc, double _stars, String _departureTime, int _seatsAvailable, boolean[] _daysOfWeek, int _searchBy) {
 		minPrice = _minPrice;

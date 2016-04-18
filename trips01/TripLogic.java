@@ -1,5 +1,7 @@
 package trips01;
 import java.io.IOException;
+import hotelSearch.*;
+import dayTourSearch.*;
 import java.text.ParseException;
 
 import hotelSearch.*;
@@ -27,9 +29,27 @@ public class TripLogic {
 	}
 	
 	
+	public void GenerateTrip(dayTourSearch.DayTours[] tours, hotelSearch.Hotel[] hotels) {
+		tripData.setTours(tours);
+		tripData.setHotelsToStay(hotels);
+	}
 	
+	public void DisplayHotelResults() {
+		hotelsData.disp();
+		
+	}
 	
+	public void  DisplayDayTourResults() {
+		
+	}
 	
+	public void SetSelectedHotel() {
+		
+	}
+	
+	public void SetSelectedTours() {
+		
+	}
 	
 /*
 	private String startDate;
