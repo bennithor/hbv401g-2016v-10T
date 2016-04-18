@@ -2,7 +2,7 @@ package trips01;
 import java.util.Scanner;
 
 public class UI {
-
+/*
 	private String startDate;
 	private String endDate;
 	private String location;
@@ -67,5 +67,5 @@ public class UI {
 	public UI() {
 		
 	}
-	
+*/	
 }

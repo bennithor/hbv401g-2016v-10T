@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 
 public class TripLogicTest {
-	
+	/*
 	private TripLogic Logic1;
 	private TripData[] Data1;
 	private TripLogic Logic2;
@@ -76,5 +76,5 @@ public class TripLogicTest {
 		Logic2 = null;
 		Data2 = null;
 	}
-
+*/
 }

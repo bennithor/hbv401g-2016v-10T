@@ -1,4 +1,6 @@
 package trips01;
+import hotelSearch.*;
+import dayTourSearch.*;
 
 public class TripData {
 
@@ -7,8 +9,8 @@ public class TripData {
 	private String toIceland;  //Flight
 	private String fromIceland; //Flight
 	private float totalPrice;
-	private String[] hotelsToStay; //Hotels
-	private String[] tours; //Daytours
+	private Hotel[] hotelsToStay; //Hotels
+	private DayTours[] tours; //Daytours
 	private String location;
 	private String destination;
 	private int numberOfPeople;
@@ -54,19 +56,19 @@ public class TripData {
 		totalPrice += price;
 	}
 	
-	public String[] getHotelsToStay() {
+	public Hotel[] getHotelsToStay() {
 		return hotelsToStay;
 	}
 	
-	public void setHotelsToStay(String[] hotels) {
+	public void setHotelsToStay(Hotel[] hotels) {
 		hotelsToStay = hotels;
 	}
 	
-	public String[] getTours() {
+	public DayTours[] getTours() {
 		return tours;
 	}
 	
-	public void setTours(String[] dayTours) {
+	public void setTours(DayTours[] dayTours) {
 		tours = dayTours;
 	}
 	
