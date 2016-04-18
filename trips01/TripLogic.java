@@ -14,7 +14,7 @@ public class TripLogic {
 	
 	
 	public TripLogic() {
-		
+		toursData = new DayToursData();
 	}
 	
 	public void HotelSearch(String _loc, String _date, String _hotelName, int _nrOfNights, int _minStars, int _MaxPrice, int[] _arr ) throws ParseException, IOException {
@@ -23,9 +23,12 @@ public class TripLogic {
 	}
 	
 	
-	public void DayTourSearch (int _minPrice, int _maxPrice, int _ageRestriction, String _loc, double _stars, String _departureTime, int _seatsAvailable, boolean[] _daysOfWeek, int _searchBy) {
-		toursData = new DayToursData( _minPrice, _maxPrice, _ageRestriction, _loc, _stars, _departureTime, _seatsAvailable, _daysOfWeek, _searchBy);
+	public void DayTourSearch () {
 		toursData.search();
+	}
+	
+	public HotelsData GetHotelData() {
+		return hotelsData;
 	}
 	
 	
@@ -37,6 +40,10 @@ public class TripLogic {
 	public void DisplayHotelResults() {
 		hotelsData.disp();
 		
+	}
+	
+	public DayToursData GetDayToursData() {
+		return toursData;
 	}
 	
 	public void  DisplayDayTourResults() {

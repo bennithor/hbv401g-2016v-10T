@@ -15,10 +15,15 @@ public class DayToursData {
 	dayTourSearch.DayTourSearch session = new dayTourSearch.DayTourSearch();
 	dayTourSearch.DayTours[] tours;
 	
+	public dayTourSearch.DayTours[] getTours() {
+		return tours;
+	}
+	
 	
 	public void search() {
 		if (searchBy == 0) {
 			tours = session.search(minPrice, maxPrice);
+			System.out.println(tours[0].getName());
 		}
 		else if (searchBy == 1) {
 			tours = session.search("filler", ageRestriction);
@@ -94,6 +99,24 @@ public class DayToursData {
 	
 	public void setDaysOfWeek(boolean[] days) {
 		daysOfWeek = days;
+	}
+	
+	public void setSearchBy(int search){
+		searchBy = search;
+	}
+	
+	public DayToursData() {
+		minPrice = 0;
+		maxPrice = 0;
+		ageRestriction = 0;
+		location = "null";
+		departureTime = "null";
+		seatsAvailable = 0;
+		daysOfWeek = new boolean[7];
+		for (int i = 0; i<7; i++){
+			daysOfWeek[i] = false;
+		}
+		searchBy = 0;
 	}
 	
 	public DayToursData(int _searchBy) {
