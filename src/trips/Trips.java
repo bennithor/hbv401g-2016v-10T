@@ -591,6 +591,11 @@ public class Trips extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Microsoft YaHei", 0, 24)); // NOI18N
         jButton1.setText("Search");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout dayToursPanelLayout = new javax.swing.GroupLayout(dayToursPanel);
         dayToursPanel.setLayout(dayToursPanelLayout);
@@ -794,6 +799,10 @@ public class Trips extends javax.swing.JFrame {
     private void jCheckBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox4ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
    
 
