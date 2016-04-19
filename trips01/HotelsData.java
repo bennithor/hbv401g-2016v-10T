@@ -15,6 +15,10 @@ public class HotelsData {
 	private Hotel[] hotel;
 	
 	
+	public void disp() {
+		session.displayResult(hotel);
+	}
+	
 	
 	public void search() throws ParseException, IOException {
 		hotel = session.searchHotel(date, nrOfNights, hotelLocation, hotelName,minStars,MaxPrice,arr);

@@ -14,6 +14,10 @@ public class Hotel {
 		this.ID = ID;
 		this.description = description;
 	}
+	
+	public Hotel() {
+		
+	}
 
 	public String getName(){
 		return name;

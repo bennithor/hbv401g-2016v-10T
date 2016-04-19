@@ -9,7 +9,7 @@ public class TripData {
 	private String toIceland;  //Flight
 	private String fromIceland; //Flight
 	private float totalPrice;
-	private Hotel hotelsToStay; //Hotels
+	private Hotel hotelsToStay = new Hotel(); //Hotels
 	private DayTours tours; //Daytours
 	private String location;
 	private String destination;
@@ -73,7 +73,6 @@ public class TripData {
 	}
 	
 	public TripData() {
-		
 	}
 	
 }

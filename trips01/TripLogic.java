@@ -38,7 +38,8 @@ public class TripLogic {
 	
 	
 	public void SetSelectedHotel(int i) {
-		tripData.setHotelsToStay(hotelsData.getHotels()[i]);
+		System.out.println(hotelsData.getHotels()[i]);
+		
 	}
 	
 	public void SetSelectedTours(int i) {
@@ -46,14 +47,17 @@ public class TripLogic {
 	}
 	
 	
-	public void BookHotel(String bookingName) throws ParseException {
-		hotelsData.book(tripData.getHotelsToStay(), bookingName);
+	public void BookHotel(String bookingName, int i) throws ParseException {
+		hotelsData.book(hotelsData.getHotels()[i], bookingName);
 	}
 	
-	public void BookDayTour(int adults, int children, String bookingName) {
-		toursData.book(tripData.getTours(), adults, children, bookingName);
+	public void BookDayTour(int adults, int children, String bookingName, int i) {
+		toursData.book(toursData.getTours()[i], adults, children, bookingName);
 	}
-	
+
+	public TripData getTripData() {
+		return tripData;
+	}
 /*
 	private String startDate;
 	private String endDate;

@@ -8,6 +8,7 @@ package trips01;
 import java.awt.CardLayout;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.Random;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -1105,7 +1106,12 @@ public class Main extends javax.swing.JFrame {
         bookButton.setText("Book trip");
         bookButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bookButtonActionPerformed(evt);
+                try {
+					bookButtonActionPerformed(evt);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         });
 
@@ -1176,6 +1182,7 @@ public class Main extends javax.swing.JFrame {
         bookingNumberLabel.setText("Your booking number");
 
         bookingNumber.setFont(new java.awt.Font("Microsoft YaHei", 0, 48)); // NOI18N
+        bookingNumber.setEditable(false);
 
         javax.swing.GroupLayout bookingNumberPanelLayout = new javax.swing.GroupLayout(bookingNumberPanel);
         bookingNumberPanel.setLayout(bookingNumberPanelLayout);
@@ -1257,10 +1264,18 @@ public class Main extends javax.swing.JFrame {
             PriceRadioButton.setSelected(true);
         } 
         else {
-        	bookPanel.setVisible(true);
+        	resultsPanel.setVisible(true);
         	hotelPanel.setVisible(false);
-        }
-        
+        }System.out.println(HotelsTable.getSelectedRow());
+        int i = HotelsTable.getSelectedRow();
+        hotelResultName.setText(logic.GetHotelData().getHotels()[i].getName());
+        hotelResultPostal.setText(logic.GetHotelData().getHotels()[i].getPostalCode());
+        hotelResultStars.setText(Integer.toString(logic.GetHotelData().getHotels()[i].getStars()));
+        hotelResultDate.setText(arrivalDate.getText());
+        hotelResultNumberOfNights.setText(Integer.toString(nights.getSelectedIndex()));
+        hotelResultNumberOfRooms.setText(Integer.toString(onePers.getSelectedIndex() + twoPers.getSelectedIndex() + threePers.getSelectedIndex() + fourPers.getSelectedIndex()));
+        hotelResultPrice.setText(Integer.toString(logic.GetHotelData().getHotels()[i].getPrice()));
+        hotelResultNumberOfGuests.setText(Integer.toString(onePers.getSelectedIndex() + 2*twoPers.getSelectedIndex() + 3*threePers.getSelectedIndex() + 4*fourPers.getSelectedIndex()));
         
     }//GEN-LAST:event_hotelContButtonActionPerformed
 
@@ -1431,7 +1446,6 @@ public class Main extends javax.swing.JFrame {
     		maxPrice.setText("-1");
     	}
     	logic.HotelSearch(hotelLocation.getText(), arrivalDate.getText(), hotelName.getText(), nights.getSelectedIndex(), stars.getSelectedIndex(), Integer.parseInt(maxPrice.getText()), arr);
-    	
     	for(int i=0; i < 25; i++) {
     		if(i < logic.GetHotelData().getHotels().length) {
     			HotelsTable.setValueAt(logic.GetHotelData().getHotels()[i].getName(), i, 0);
@@ -1445,8 +1459,30 @@ public class Main extends javax.swing.JFrame {
     private void dayToursContButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dayToursContButtonActionPerformed
         resultsPanel.setVisible(true);
         dayToursPanel.setVisible(false);
+        int i = DayToursTable.getSelectedRow();
+        dayTourResultName.setText(logic.GetDayToursData().getTours()[i].getName());
+        dayTourResultLocation.setText(logic.GetDayToursData().getTours()[i].getLocation());
+        dayTourResultDepartureTime.setText(logic.GetDayToursData().getTours()[i].getDepartureTime());
+        dayTourResultDuration.setText(logic.GetDayToursData().getTours()[i].getDuration());
+        dayTourResultNumberOfSeats.setText(Integer.toString(numberOfAdults.getSelectedIndex() + numberOfChildren.getSelectedIndex()));
+        dayTourResultName.setText(logic.GetDayToursData().getTours()[i].getName());
+        dayTourResultPrice.setText(Integer.toString(logic.GetDayToursData().getTours()[i].getPrice()));
+        
     }//GEN-LAST:event_dayToursContButtonActionPerformed
 
+	public static String getBookingId() {
+  		StringBuilder randomString = new StringBuilder();
+  		Random random = new Random();
+
+		String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+		for(int i = 0; i < 6; i++) {
+			randomString.append(alphabet.charAt(random.nextInt(alphabet.length())));
+		}
+
+		return randomString.toString();
+	}
+    
+    
     private void dayToursBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dayToursBackButtonActionPerformed
         
          if(HotelCheckbox.isSelected()){
@@ -1508,8 +1544,18 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_numberOfAdultsActionPerformed
 
-    private void bookButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookButtonActionPerformed
-        resultsPanel.setVisible(false);
+    private void bookButtonActionPerformed(java.awt.event.ActionEvent evt) throws ParseException {//GEN-FIRST:event_bookButtonActionPerformed
+        String bookNumber = getBookingId();
+        int i = HotelsTable.getSelectedRow();
+        int j = DayToursTable.getSelectedRow();
+        bookingNumber.setText(bookNumber);
+    	if(HotelCheckbox.isSelected()) {
+    		logic.BookHotel(bookNumber, i);
+    	}
+    	if(DayToursCheckbox.isSelected()) {
+    		logic.BookDayTour(numberOfAdults.getSelectedIndex(), numberOfChildren.getSelectedIndex(), bookNumber, j);
+    	}
+    	resultsPanel.setVisible(false);
         bookingNumberPanel.setVisible(true);
     }//GEN-LAST:event_bookButtonActionPerformed
 
