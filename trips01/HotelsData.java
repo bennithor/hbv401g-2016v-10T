@@ -20,6 +20,9 @@ public class HotelsData {
 		hotel = session.searchHotel(date, nrOfNights, hotelLocation, hotelName,minStars,MaxPrice,arr);
 	}
 	
+	public Hotel[] getHotels() {
+		return hotel;
+	}
 	
 	public void disp() {
 		session.displayResult(hotel);

@@ -24,7 +24,10 @@ public class Main extends javax.swing.JFrame {
      */
     
 	TripLogic logic = new TripLogic();
-	
+    
+    
+
+    
     public Main() {
         initComponents();
         
@@ -50,6 +53,7 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         mainPanel = new javax.swing.JPanel();
         bookPanel = new javax.swing.JPanel();
         SearchQ = new javax.swing.JLabel();
@@ -87,9 +91,39 @@ public class Main extends javax.swing.JFrame {
         twoPersLabel = new javax.swing.JLabel();
         threePersLabel = new javax.swing.JLabel();
         fourPersLabel = new javax.swing.JLabel();
+        hotelSearchButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        HotelsTable = new javax.swing.JTable();
         dayToursPanel = new javax.swing.JPanel();
         dayToursLabel = new javax.swing.JLabel();
         contButton3 = new javax.swing.JButton();
+        dayToursContainer1 = new javax.swing.JLayeredPane();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jTextField2 = new javax.swing.JTextField();
+        jRadioButton3 = new javax.swing.JRadioButton();
+        jTextField3 = new javax.swing.JTextField();
+        jRadioButton4 = new javax.swing.JRadioButton();
+        jComboBox1 = new javax.swing.JComboBox();
+        jRadioButton5 = new javax.swing.JRadioButton();
+        jTextField4 = new javax.swing.JTextField();
+        jRadioButton6 = new javax.swing.JRadioButton();
+        jComboBox2 = new javax.swing.JComboBox();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jTextField5 = new javax.swing.JTextField();
+        dayToursContainer2 = new javax.swing.JLayeredPane();
+        jCheckBox4 = new javax.swing.JCheckBox();
+        jCheckBox5 = new javax.swing.JCheckBox();
+        jCheckBox6 = new javax.swing.JCheckBox();
+        jCheckBox7 = new javax.swing.JCheckBox();
+        jCheckBox3 = new javax.swing.JCheckBox();
+        jRadioButton7 = new javax.swing.JRadioButton();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jCheckBox2 = new javax.swing.JCheckBox();
+        DayTourSearchButton = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        DayToursTable = new javax.swing.JTable();
         flightPanel = new javax.swing.JPanel();
         flightLabel = new javax.swing.JLabel();
         contButton4 = new javax.swing.JButton();
@@ -172,7 +206,7 @@ public class Main extends javax.swing.JFrame {
                     .addGroup(bookPanelLayout.createSequentialGroup()
                         .addGap(137, 137, 137)
                         .addComponent(SearchQ)))
-                .addContainerGap(831, Short.MAX_VALUE))
+                .addContainerGap(864, Short.MAX_VALUE))
         );
         bookPanelLayout.setVerticalGroup(
             bookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,7 +226,7 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(DayToursCheckbox))
                 .addGap(69, 69, 69)
                 .addComponent(contButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(292, Short.MAX_VALUE))
+                .addContainerGap(307, Short.MAX_VALUE))
         );
 
         mainPanel.add(bookPanel, "card12");
@@ -206,12 +240,7 @@ public class Main extends javax.swing.JFrame {
         contButton2.setText("Continue");
         contButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                try {
-					contButton2ActionPerformed(evt);
-				} catch (NumberFormatException | ParseException | IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+                contButton2ActionPerformed(evt);
             }
         });
 
@@ -285,13 +314,13 @@ public class Main extends javax.swing.JFrame {
         selectLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 14)); // NOI18N
         selectLabel.setText("Please select the number of rooms of each type you wish to book:");
 
-        onePers.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" }));
+        onePers.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" }));
 
-        twoPers.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", " " }));
+        twoPers.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", " " }));
 
-        threePers.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" }));
+        threePers.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" }));
 
-        fourPers.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" }));
+        fourPers.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" }));
 
         onePersLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 14)); // NOI18N
         onePersLabel.setText("1 pers");
@@ -356,14 +385,76 @@ public class Main extends javax.swing.JFrame {
         hotelsContainer2.setLayer(threePersLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
         hotelsContainer2.setLayer(fourPersLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
+        hotelSearchButton.setFont(new java.awt.Font("Microsoft YaHei", 0, 24)); // NOI18N
+        hotelSearchButton.setText("Search");
+        hotelSearchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+					hotelSearchButtonActionPerformed(evt);
+				} catch (NumberFormatException | ParseException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            }
+        });
+
+        HotelsTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Name", "Stars", "Price", "PostalCode", "Selected"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, true, false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(HotelsTable);
+
         javax.swing.GroupLayout hotelPanelLayout = new javax.swing.GroupLayout(hotelPanel);
         hotelPanel.setLayout(hotelPanelLayout);
         hotelPanelLayout.setHorizontalGroup(
             hotelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(hotelPanelLayout.createSequentialGroup()
-                .addGap(68, 68, 68)
+                .addGap(75, 75, 75)
                 .addComponent(backButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1159, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(contButton2)
                 .addGap(68, 68, 68))
             .addGroup(hotelPanelLayout.createSequentialGroup()
@@ -373,10 +464,14 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(hotelLabel))
                     .addGroup(hotelPanelLayout.createSequentialGroup()
                         .addGap(24, 24, 24)
-                        .addGroup(hotelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(hotelsContainer1)
-                            .addComponent(hotelsContainer2))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(hotelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(hotelSearchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(hotelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(hotelsContainer1)
+                                .addComponent(hotelsContainer2)))
+                        .addGap(60, 60, 60)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(609, Short.MAX_VALUE))
         );
         hotelPanelLayout.setVerticalGroup(
             hotelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -384,13 +479,18 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(hotelLabel)
                 .addGap(40, 40, 40)
-                .addComponent(hotelsContainer1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(hotelsContainer2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 177, Short.MAX_VALUE)
-                .addGroup(hotelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(backButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(contButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE))
+                .addGroup(hotelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(hotelPanelLayout.createSequentialGroup()
+                        .addComponent(hotelsContainer1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(hotelsContainer2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(hotelSearchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
+                .addGroup(hotelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(contButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(backButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33))
         );
 
@@ -398,31 +498,283 @@ public class Main extends javax.swing.JFrame {
 
         dayToursPanel.setBackground(new java.awt.Color(255, 255, 255));
 
-        dayToursLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 36)); // NOI18N
+        dayToursLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 24)); // NOI18N
         dayToursLabel.setText(" DayTours");
 
         contButton3.setFont(new java.awt.Font("Microsoft YaHei", 0, 24)); // NOI18N
         contButton3.setText("Continue");
+
+        dayToursContainer1.setLayout(new java.awt.GridLayout(0, 2, 10, 15));
+
+        jRadioButton2.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(jRadioButton2);
+        jRadioButton2.setFont(new java.awt.Font("Microsoft YaHei", 0, 14)); // NOI18N
+        jRadioButton2.setText("Age restriction ( years )");
+        jRadioButton2.setMaximumSize(new java.awt.Dimension(83, 27));
+        jRadioButton2.setMinimumSize(new java.awt.Dimension(83, 27));
+        jRadioButton2.setOpaque(false);
+        jRadioButton2.setPreferredSize(new java.awt.Dimension(83, 27));
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
+        dayToursContainer1.add(jRadioButton2);
+
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
+        dayToursContainer1.add(jTextField2);
+
+        jRadioButton3.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(jRadioButton3);
+        jRadioButton3.setFont(new java.awt.Font("Microsoft YaHei", 0, 14)); // NOI18N
+        jRadioButton3.setText("Location");
+        dayToursContainer1.add(jRadioButton3);
+        dayToursContainer1.add(jTextField3);
+
+        jRadioButton4.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(jRadioButton4);
+        jRadioButton4.setFont(new java.awt.Font("Microsoft YaHei", 0, 14)); // NOI18N
+        jRadioButton4.setText("Minimum star rating");
+        dayToursContainer1.add(jRadioButton4);
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5" }));
+        dayToursContainer1.add(jComboBox1);
+
+        jRadioButton5.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(jRadioButton5);
+        jRadioButton5.setFont(new java.awt.Font("Microsoft YaHei", 0, 14)); // NOI18N
+        jRadioButton5.setText("Departure time ( hh:mm )");
+        dayToursContainer1.add(jRadioButton5);
+        dayToursContainer1.add(jTextField4);
+
+        jRadioButton6.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(jRadioButton6);
+        jRadioButton6.setFont(new java.awt.Font("Microsoft YaHei", 0, 14)); // NOI18N
+        jRadioButton6.setText("Number of seats available");
+        dayToursContainer1.add(jRadioButton6);
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30" }));
+        dayToursContainer1.add(jComboBox2);
+
+        jRadioButton1.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(jRadioButton1);
+        jRadioButton1.setFont(new java.awt.Font("Microsoft YaHei", 0, 14)); // NOI18N
+        jRadioButton1.setText("Price ( ISK )");
+        jRadioButton1.setMaximumSize(new java.awt.Dimension(83, 27));
+        jRadioButton1.setMinimumSize(new java.awt.Dimension(83, 27));
+        jRadioButton1.setOpaque(false);
+        jRadioButton1.setPreferredSize(new java.awt.Dimension(83, 27));
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Microsoft YaHei", 0, 14)); // NOI18N
+        jLabel1.setText("-");
+
+        jCheckBox4.setBackground(new java.awt.Color(255, 255, 255));
+        jCheckBox4.setText("Thu");
+        jCheckBox4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox4ActionPerformed(evt);
+            }
+        });
+
+        jCheckBox5.setBackground(new java.awt.Color(255, 255, 255));
+        jCheckBox5.setText("Fri");
+
+        jCheckBox6.setBackground(new java.awt.Color(255, 255, 255));
+        jCheckBox6.setText("Sat");
+        jCheckBox6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox6ActionPerformed(evt);
+            }
+        });
+
+        jCheckBox7.setBackground(new java.awt.Color(255, 255, 255));
+        jCheckBox7.setText("Sun");
+
+        jCheckBox3.setBackground(new java.awt.Color(255, 255, 255));
+        jCheckBox3.setText("Wed");
+
+        jRadioButton7.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(jRadioButton7);
+        jRadioButton7.setFont(new java.awt.Font("Microsoft YaHei", 0, 14)); // NOI18N
+        jRadioButton7.setText("Days of week");
+
+        jCheckBox1.setBackground(new java.awt.Color(255, 255, 255));
+        jCheckBox1.setText("Mon");
+
+        jCheckBox2.setBackground(new java.awt.Color(255, 255, 255));
+        jCheckBox2.setText("Tue");
+
+        javax.swing.GroupLayout dayToursContainer2Layout = new javax.swing.GroupLayout(dayToursContainer2);
+        dayToursContainer2.setLayout(dayToursContainer2Layout);
+        dayToursContainer2Layout.setHorizontalGroup(
+            dayToursContainer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dayToursContainer2Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jCheckBox1)
+                .addGap(50, 50, 50)
+                .addComponent(jCheckBox2)
+                .addGap(50, 50, 50)
+                .addComponent(jCheckBox3)
+                .addGap(50, 50, 50)
+                .addComponent(jCheckBox4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addComponent(jCheckBox5)
+                .addGap(50, 50, 50)
+                .addComponent(jCheckBox6)
+                .addGap(50, 50, 50)
+                .addComponent(jCheckBox7)
+                .addContainerGap())
+            .addGroup(dayToursContainer2Layout.createSequentialGroup()
+                .addComponent(jRadioButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        dayToursContainer2Layout.setVerticalGroup(
+            dayToursContainer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dayToursContainer2Layout.createSequentialGroup()
+                .addComponent(jRadioButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addGroup(dayToursContainer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBox4)
+                    .addComponent(jCheckBox5)
+                    .addComponent(jCheckBox6)
+                    .addComponent(jCheckBox7)
+                    .addComponent(jCheckBox1)
+                    .addComponent(jCheckBox2)
+                    .addComponent(jCheckBox3))
+                .addGap(36, 36, 36))
+        );
+        dayToursContainer2.setLayer(jCheckBox4, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        dayToursContainer2.setLayer(jCheckBox5, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        dayToursContainer2.setLayer(jCheckBox6, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        dayToursContainer2.setLayer(jCheckBox7, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        dayToursContainer2.setLayer(jCheckBox3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        dayToursContainer2.setLayer(jRadioButton7, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        dayToursContainer2.setLayer(jCheckBox1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        dayToursContainer2.setLayer(jCheckBox2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        DayTourSearchButton.setFont(new java.awt.Font("Microsoft YaHei", 0, 24)); // NOI18N
+        DayTourSearchButton.setText("Search");
+        DayTourSearchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DayTourSearchButtonActionPerformed(evt);
+            }
+        });
+
+        DayToursTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Name", "Price", "Duration", "Description", "Selected"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(DayToursTable);
 
         javax.swing.GroupLayout dayToursPanelLayout = new javax.swing.GroupLayout(dayToursPanel);
         dayToursPanel.setLayout(dayToursPanelLayout);
         dayToursPanelLayout.setHorizontalGroup(
             dayToursPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dayToursPanelLayout.createSequentialGroup()
-                .addGap(302, 302, 302)
-                .addGroup(dayToursPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(contButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(dayToursLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE))
-                .addContainerGap(1090, Short.MAX_VALUE))
+                .addGroup(dayToursPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(DayTourSearchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(dayToursPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(dayToursPanelLayout.createSequentialGroup()
+                            .addGap(15, 15, 15)
+                            .addComponent(dayToursLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(dayToursPanelLayout.createSequentialGroup()
+                            .addGap(303, 303, 303)
+                            .addComponent(contButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(dayToursPanelLayout.createSequentialGroup()
+                            .addGap(91, 91, 91)
+                            .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(dayToursPanelLayout.createSequentialGroup()
+                            .addGap(91, 91, 91)
+                            .addGroup(dayToursPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(dayToursContainer1)
+                                .addComponent(dayToursContainer2)))))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(415, Short.MAX_VALUE))
         );
         dayToursPanelLayout.setVerticalGroup(
             dayToursPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dayToursPanelLayout.createSequentialGroup()
-                .addGap(125, 125, 125)
+                .addContainerGap()
                 .addComponent(dayToursLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 344, Short.MAX_VALUE)
+                .addGroup(dayToursPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dayToursPanelLayout.createSequentialGroup()
+                        .addGap(136, 136, 136)
+                        .addGroup(dayToursPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)
+                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(dayToursContainer1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(dayToursContainer2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(DayTourSearchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(dayToursPanelLayout.createSequentialGroup()
+                        .addGap(68, 68, 68)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addComponent(contButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(108, 108, 108))
+                .addGap(31, 31, 31))
         );
 
         mainPanel.add(dayToursPanel, "card12");
@@ -447,14 +799,14 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(flightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(contButton4)
                     .addComponent(flightLabel))
-                .addContainerGap(1151, Short.MAX_VALUE))
+                .addContainerGap(1184, Short.MAX_VALUE))
         );
         flightPanelLayout.setVerticalGroup(
             flightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(flightPanelLayout.createSequentialGroup()
                 .addGap(196, 196, 196)
                 .addComponent(flightLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 357, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 372, Short.MAX_VALUE)
                 .addComponent(contButton4)
                 .addGap(87, 87, 87))
         );
@@ -488,6 +840,7 @@ public class Main extends javax.swing.JFrame {
         else if (DayToursCheckbox.isSelected()){
             dayToursPanel.setVisible(true);
             bookPanel.setVisible(false);
+            jRadioButton1.setSelected(true);
             
         }
         
@@ -507,13 +860,14 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_HotelCheckboxActionPerformed
 
-    private void contButton2ActionPerformed(java.awt.event.ActionEvent evt) throws NumberFormatException, ParseException, IOException {//GEN-FIRST:event_contButton2ActionPerformed
+    private void contButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contButton2ActionPerformed
         if (DayToursCheckbox.isSelected()){
             dayToursPanel.setVisible(true);
             hotelPanel.setVisible(false);
-            
-        }        
-        PlaceHolder();
+            jRadioButton1.setSelected(true);
+        }    
+        
+        
     }//GEN-LAST:event_contButton2ActionPerformed
 
     private void backButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButton1ActionPerformed
@@ -531,7 +885,12 @@ public class Main extends javax.swing.JFrame {
         if(HotelCheckbox.isSelected()){
             hotelPanel.setVisible(true);
             flightPanel.setVisible(false);
-            
+             
+        }
+         else if (DayToursCheckbox.isSelected()){
+            dayToursPanel.setVisible(true);
+            bookPanel.setVisible(false);
+            jRadioButton1.setSelected(true);
             
         }
         
@@ -549,10 +908,85 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_maxPriceActionPerformed
 
-   
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
 
-    
-    public void PlaceHolder() throws NumberFormatException, ParseException, IOException {
+    private void jCheckBox6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox6ActionPerformed
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
+
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void jCheckBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox4ActionPerformed
+
+    private void DayTourSearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DayTourSearchButtonActionPerformed
+    	boolean[] check = new boolean[7];
+    	
+    	
+    	if (jRadioButton1.isSelected()) {
+    		logic.GetDayToursData().setMinPrice(Integer.parseInt(jTextField1.getText()));
+    		logic.GetDayToursData().setMaxPrice(Integer.parseInt(jTextField5.getText()));
+    		logic.GetDayToursData().setSearchBy(0);
+    		logic.DayTourSearch();
+    	}
+    	if (jRadioButton2.isSelected()) {
+    		logic.GetDayToursData().setAgeRestriction(Integer.parseInt(jTextField2.getText()));
+    		logic.GetDayToursData().setSearchBy(1);
+    		logic.DayTourSearch();
+    	}
+    	if (jRadioButton3.isSelected()) {
+    		logic.GetDayToursData().setLocation(jTextField3.getText());
+    		logic.GetDayToursData().setSearchBy(2);
+    		logic.DayTourSearch();
+    	}
+    	if (jRadioButton4.isSelected()) {
+    		logic.GetDayToursData().setStars(jComboBox1.getSelectedIndex());
+    		logic.GetDayToursData().setSearchBy(3);
+    		logic.DayTourSearch();
+    	}
+    	if (jRadioButton5.isSelected()) {
+    		logic.GetDayToursData().setDepartureTime(jTextField4.getText());
+    		logic.GetDayToursData().setSearchBy(4);
+    		logic.DayTourSearch();
+    	}
+    	if (jRadioButton6.isSelected()) {
+    		logic.GetDayToursData().setSeatsAvailable(jComboBox2.getSelectedIndex());
+    		logic.GetDayToursData().setSearchBy(5);
+    		logic.DayTourSearch();
+    	}
+    	if (jRadioButton7.isSelected()) {
+    		check[0] = jCheckBox1.isSelected();
+    		check[1] = jCheckBox2.isSelected();
+    		check[2] = jCheckBox3.isSelected();
+    		check[3] = jCheckBox4.isSelected();
+    		check[4] = jCheckBox5.isSelected();
+    		check[5] = jCheckBox6.isSelected();
+    		check[6] = jCheckBox7.isSelected();
+    		logic.GetDayToursData().setDaysOfWeek(check);
+    		logic.GetDayToursData().setSearchBy(6);
+    		logic.DayTourSearch();
+    	}
+    	for(int i=0; i<25; i++) {
+    		if(i < logic.GetDayToursData().getTours().length) {
+    			DayToursTable.setValueAt(logic.GetDayToursData().getTours()[i].getName(), i, 0);
+    			DayToursTable.setValueAt(logic.GetDayToursData().getTours()[i].getPrice(), i, 1);
+    			DayToursTable.setValueAt(logic.GetDayToursData().getTours()[i].getDuration(), i, 2);
+    			DayToursTable.setValueAt(logic.GetDayToursData().getTours()[i].getDescription(), i, 3);
+    		}
+    	}
+    	
+    }//GEN-LAST:event_DayTourSearchButtonActionPerformed
+
+    private void hotelSearchButtonActionPerformed(java.awt.event.ActionEvent evt) throws NumberFormatException, ParseException, IOException {//GEN-FIRST:event_hotelSearchButtonActionPerformed
     	int[] arr = new int[4];
     	arr[0] = onePers.getSelectedIndex();
     	arr[1] = twoPers.getSelectedIndex();
@@ -563,7 +997,20 @@ public class Main extends javax.swing.JFrame {
     	}
     	logic.HotelSearch(hotelLocation.getText(), arrivalDate.getText(), hotelName.getText(), nights.getSelectedIndex(), stars.getSelectedIndex(), Integer.parseInt(maxPrice.getText()), arr);
     	logic.DisplayHotelResults();
-    }
+    	
+    	for(int i=0; i < 25; i++) {
+    		if(i < logic.GetHotelData().getHotels().length) {
+    			HotelsTable.setValueAt(logic.GetHotelData().getHotels()[i].getName(), i, 0);
+    			HotelsTable.setValueAt(logic.GetHotelData().getHotels()[i].getStars(), i, 1);
+    			HotelsTable.setValueAt(logic.GetHotelData().getHotels()[i].getPrice(), i, 2);
+    			HotelsTable.setValueAt(logic.GetHotelData().getHotels()[i].getPostalCode(), i, 3);
+    		}
+    	}
+    }//GEN-LAST:event_hotelSearchButtonActionPerformed
+
+
+    
+    
     
     
     
@@ -603,21 +1050,27 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton DayTourSearchButton;
     private javax.swing.JLabel DayTours;
     private javax.swing.JCheckBox DayToursCheckbox;
+    private javax.swing.JTable DayToursTable;
     private javax.swing.JCheckBox FlightCheckbox;
     private javax.swing.JLabel Flights;
     private javax.swing.JCheckBox HotelCheckbox;
     private javax.swing.JLabel Hotels;
+    private javax.swing.JTable HotelsTable;
     private javax.swing.JLabel SearchQ;
     private javax.swing.JTextField arrivalDate;
     private javax.swing.JLabel arrivalDateLabel;
     private javax.swing.JButton backButton1;
     private javax.swing.JPanel bookPanel;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton contButton1;
     private javax.swing.JButton contButton2;
     private javax.swing.JButton contButton3;
     private javax.swing.JButton contButton4;
+    private javax.swing.JLayeredPane dayToursContainer1;
+    private javax.swing.JLayeredPane dayToursContainer2;
     private javax.swing.JLabel dayToursLabel;
     private javax.swing.JPanel dayToursPanel;
     private javax.swing.JLabel flightLabel;
@@ -629,8 +1082,33 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField hotelName;
     private javax.swing.JLabel hotelNameLabel;
     private javax.swing.JPanel hotelPanel;
+    private javax.swing.JButton hotelSearchButton;
     private javax.swing.JLayeredPane hotelsContainer1;
     private javax.swing.JLayeredPane hotelsContainer2;
+    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JCheckBox jCheckBox3;
+    private javax.swing.JCheckBox jCheckBox4;
+    private javax.swing.JCheckBox jCheckBox5;
+    private javax.swing.JCheckBox jCheckBox6;
+    private javax.swing.JCheckBox jCheckBox7;
+    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox jComboBox2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton jRadioButton3;
+    private javax.swing.JRadioButton jRadioButton4;
+    private javax.swing.JRadioButton jRadioButton5;
+    private javax.swing.JRadioButton jRadioButton6;
+    private javax.swing.JRadioButton jRadioButton7;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
     private javax.swing.JLabel locationLabel;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JTextField maxPrice;
