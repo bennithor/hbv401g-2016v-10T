@@ -15,10 +15,6 @@ public class HotelsData {
 	private Hotel[] hotel;
 	
 	
-	public void disp() {
-		session.displayResult(hotel);
-	}
-	
 	
 	public void search() throws ParseException, IOException {
 		hotel = session.searchHotel(date, nrOfNights, hotelLocation, hotelName,minStars,MaxPrice,arr);
@@ -28,9 +24,6 @@ public class HotelsData {
 		return hotel;
 	}
 	
-	public void setDate(String _date) {
-		date = _date;
-	}
 	
 	public void book(Hotel hotel, String bookingName) throws ParseException {
 		session.bookHotel(hotel, date, nrOfNights, bookingName, arr);

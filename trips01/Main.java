@@ -13,6 +13,8 @@ import java.util.Random;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,15 +27,17 @@ public class Main extends javax.swing.JFrame {
      * Creates new form Main
      */
     
-	DefaultTableModel model;
-    TripLogic logic = new TripLogic();
+	TripLogic logic = new TripLogic();
+    
 
     
     public Main() {
         initComponents();
-        model = (DefaultTableModel) DayToursTable.getModel();
         
-        
+        emptyTable = HotelsTable;
+        emptyTable2 = DayToursTable;
+        emptyTable3 = flightTable;
+    
        
         
         
@@ -58,15 +62,15 @@ public class Main extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         mainPanel = new javax.swing.JPanel();
         bookPanel = new javax.swing.JPanel();
+        bookPanelContainer = new javax.swing.JLayeredPane();
         SearchQ = new javax.swing.JLabel();
-        contButton1 = new javax.swing.JButton();
-        FlightCheckbox = new javax.swing.JCheckBox();
-        HotelCheckbox = new javax.swing.JCheckBox();
-        DayToursCheckbox = new javax.swing.JCheckBox();
         Flights = new javax.swing.JLabel();
         Hotels = new javax.swing.JLabel();
         DayTours = new javax.swing.JLabel();
-        bookPanelContainer = new javax.swing.JLayeredPane();
+        FlightCheckbox = new javax.swing.JCheckBox();
+        HotelCheckbox = new javax.swing.JCheckBox();
+        DayToursCheckbox = new javax.swing.JCheckBox();
+        contButton1 = new javax.swing.JButton();
         hotelPanel = new javax.swing.JPanel();
         hotelLabel = new javax.swing.JLabel();
         hotelContButton = new javax.swing.JButton();
@@ -136,9 +140,28 @@ public class Main extends javax.swing.JFrame {
         flightPanel = new javax.swing.JPanel();
         flightLabel = new javax.swing.JLabel();
         contButton4 = new javax.swing.JButton();
+        flightsBackButton = new javax.swing.JButton();
+        flightContainer = new javax.swing.JLayeredPane();
+        flightFromLabel = new javax.swing.JLabel();
+        flightTo = new javax.swing.JComboBox();
+        flightToLabel = new javax.swing.JLabel();
+        flightFrom = new javax.swing.JComboBox();
+        flightDateLabel = new javax.swing.JLabel();
+        flightDate = new javax.swing.JComboBox();
+        flightsPrice = new javax.swing.JLabel();
+        flightDash = new javax.swing.JLabel();
+        flightsFromPrice = new javax.swing.JComboBox();
+        flightsToPrice = new javax.swing.JComboBox();
+        flightSearchButton = new javax.swing.JButton();
+        flightsScrollPane = new javax.swing.JScrollPane();
+        flightTable = new javax.swing.JTable();
         resultsPanel = new javax.swing.JPanel();
         startPageButton = new javax.swing.JButton();
         resultsBackButton = new javax.swing.JButton();
+        tripInfoLabel = new javax.swing.JLabel();
+        hotelInfoLabel = new javax.swing.JLabel();
+        dayTourInfoLabel = new javax.swing.JLabel();
+        bookButton = new javax.swing.JButton();
         resultsContainerHotels = new javax.swing.JLayeredPane();
         hotelResultNameLabel = new javax.swing.JLabel();
         hotelResultName = new javax.swing.JTextField();
@@ -169,15 +192,24 @@ public class Main extends javax.swing.JFrame {
         dayTourResultNumberOfSeats = new javax.swing.JTextField();
         dayTourResultPriceLabel = new javax.swing.JLabel();
         dayTourResultPrice = new javax.swing.JTextField();
-        tripInfoLabel = new javax.swing.JLabel();
-        hotelInfoLabel = new javax.swing.JLabel();
-        dayTourInfoLabel = new javax.swing.JLabel();
-        bookButton = new javax.swing.JButton();
+        resultsContainerFlights = new javax.swing.JLayeredPane();
+        flightResultToLabel = new javax.swing.JLabel();
+        flightResultTo = new javax.swing.JTextField();
+        flightResultFromLabel = new javax.swing.JLabel();
+        flightResultFrom = new javax.swing.JTextField();
+        flightResultDateLabel = new javax.swing.JLabel();
+        flightResultDate = new javax.swing.JTextField();
+        flightResultNumberLabel = new javax.swing.JLabel();
+        flightResultNumber = new javax.swing.JTextField();
+        flightResultPriceLabel = new javax.swing.JLabel();
+        flightResultPrice = new javax.swing.JTextField();
+        flightInfoLabel = new javax.swing.JLabel();
         bookingNumberPanel = new javax.swing.JPanel();
         bookingNumberLabel = new javax.swing.JLabel();
         bookingNumber = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1280, 720));
 
         mainPanel.setBackground(new java.awt.Color(255, 255, 255));
         mainPanel.setLayout(new java.awt.CardLayout());
@@ -188,13 +220,14 @@ public class Main extends javax.swing.JFrame {
         SearchQ.setFont(new java.awt.Font("Microsoft YaHei", 0, 36)); // NOI18N
         SearchQ.setText("What would you like to search for?");
 
-        contButton1.setFont(new java.awt.Font("Microsoft YaHei", 0, 24)); // NOI18N
-        contButton1.setText("Continue");
-        contButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                contButton1ActionPerformed(evt);
-            }
-        });
+        Flights.setFont(new java.awt.Font("Microsoft YaHei", 0, 24)); // NOI18N
+        Flights.setText("Flights");
+
+        Hotels.setFont(new java.awt.Font("Microsoft YaHei", 0, 24)); // NOI18N
+        Hotels.setText("Hotels");
+
+        DayTours.setFont(new java.awt.Font("Microsoft YaHei", 0, 24)); // NOI18N
+        DayTours.setText("Day Tours");
 
         FlightCheckbox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -214,88 +247,86 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        Flights.setFont(new java.awt.Font("Microsoft YaHei", 0, 24)); // NOI18N
-        Flights.setText("Flights");
-
-        Hotels.setFont(new java.awt.Font("Microsoft YaHei", 0, 24)); // NOI18N
-        Hotels.setText("Hotels");
-
-        DayTours.setFont(new java.awt.Font("Microsoft YaHei", 0, 24)); // NOI18N
-        DayTours.setText("Day Tours");
+        contButton1.setFont(new java.awt.Font("Microsoft YaHei", 0, 24)); // NOI18N
+        contButton1.setText("Continue");
+        contButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                contButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout bookPanelContainerLayout = new javax.swing.GroupLayout(bookPanelContainer);
         bookPanelContainer.setLayout(bookPanelContainerLayout);
         bookPanelContainerLayout.setHorizontalGroup(
             bookPanelContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 575, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bookPanelContainerLayout.createSequentialGroup()
+                .addGap(0, 161, Short.MAX_VALUE)
+                .addComponent(SearchQ)
+                .addGap(160, 160, 160))
+            .addGroup(bookPanelContainerLayout.createSequentialGroup()
+                .addGroup(bookPanelContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(bookPanelContainerLayout.createSequentialGroup()
+                        .addGap(225, 225, 225)
+                        .addComponent(Flights)
+                        .addGap(104, 104, 104)
+                        .addComponent(Hotels)
+                        .addGap(104, 104, 104)
+                        .addComponent(DayTours))
+                    .addGroup(bookPanelContainerLayout.createSequentialGroup()
+                        .addGap(251, 251, 251)
+                        .addComponent(FlightCheckbox)
+                        .addGap(166, 166, 166)
+                        .addComponent(HotelCheckbox)
+                        .addGap(165, 165, 165)
+                        .addComponent(DayToursCheckbox))
+                    .addGroup(bookPanelContainerLayout.createSequentialGroup()
+                        .addGap(356, 356, 356)
+                        .addComponent(contButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         bookPanelContainerLayout.setVerticalGroup(
             bookPanelContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(bookPanelContainerLayout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addComponent(SearchQ)
+                .addGap(56, 56, 56)
+                .addGroup(bookPanelContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Flights)
+                    .addComponent(Hotels)
+                    .addComponent(DayTours))
+                .addGap(46, 46, 46)
+                .addGroup(bookPanelContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(HotelCheckbox)
+                    .addComponent(FlightCheckbox)
+                    .addComponent(DayToursCheckbox))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
+                .addComponent(contButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(67, 67, 67))
         );
+        bookPanelContainer.setLayer(SearchQ, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        bookPanelContainer.setLayer(Flights, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        bookPanelContainer.setLayer(Hotels, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        bookPanelContainer.setLayer(DayTours, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        bookPanelContainer.setLayer(FlightCheckbox, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        bookPanelContainer.setLayer(HotelCheckbox, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        bookPanelContainer.setLayer(DayToursCheckbox, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        bookPanelContainer.setLayer(contButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout bookPanelLayout = new javax.swing.GroupLayout(bookPanel);
         bookPanel.setLayout(bookPanelLayout);
         bookPanelLayout.setHorizontalGroup(
             bookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bookPanelLayout.createSequentialGroup()
-                .addGroup(bookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(bookPanelLayout.createSequentialGroup()
-                        .addGap(190, 190, 190)
-                        .addGroup(bookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Flights)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bookPanelLayout.createSequentialGroup()
-                                .addComponent(FlightCheckbox)
-                                .addGap(29, 29, 29)))
-                        .addGroup(bookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(bookPanelLayout.createSequentialGroup()
-                                .addGap(117, 117, 117)
-                                .addComponent(Hotels))
-                            .addGroup(bookPanelLayout.createSequentialGroup()
-                                .addGap(145, 145, 145)
-                                .addComponent(HotelCheckbox)))
-                        .addGroup(bookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(bookPanelLayout.createSequentialGroup()
-                                .addGap(117, 117, 117)
-                                .addComponent(DayTours))
-                            .addGroup(bookPanelLayout.createSequentialGroup()
-                                .addGap(145, 145, 145)
-                                .addComponent(DayToursCheckbox))))
-                    .addGroup(bookPanelLayout.createSequentialGroup()
-                        .addGap(321, 321, 321)
-                        .addComponent(contButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(100, 100, 100)
-                        .addComponent(bookPanelContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(bookPanelLayout.createSequentialGroup()
-                        .addGap(137, 137, 137)
-                        .addComponent(SearchQ)))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addGap(315, 315, 315)
+                .addComponent(bookPanelContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(654, Short.MAX_VALUE))
         );
         bookPanelLayout.setVerticalGroup(
             bookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(bookPanelLayout.createSequentialGroup()
-                .addGap(150, 150, 150)
-                .addComponent(SearchQ)
-                .addGap(56, 56, 56)
-                .addGroup(bookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Flights, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Hotels, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(DayTours, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(18, 18, 18)
-                .addGroup(bookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(bookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(FlightCheckbox)
-                        .addComponent(HotelCheckbox))
-                    .addComponent(DayToursCheckbox))
-                .addGroup(bookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(bookPanelLayout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addComponent(contButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(368, Short.MAX_VALUE))
-                    .addGroup(bookPanelLayout.createSequentialGroup()
-                        .addGap(111, 111, 111)
-                        .addComponent(bookPanelContainer)
-                        .addContainerGap())))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bookPanelLayout.createSequentialGroup()
+                .addContainerGap(124, Short.MAX_VALUE)
+                .addComponent(bookPanelContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(117, 117, 117))
         );
 
         mainPanel.add(bookPanel, "card12");
@@ -541,7 +572,7 @@ public class Main extends javax.swing.JFrame {
                                     .addComponent(hotelsContainer2)))
                             .addGap(131, 131, 131)
                             .addComponent(hotelsScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(68, 113, Short.MAX_VALUE))
+                .addGap(68, 760, Short.MAX_VALUE))
         );
         hotelPanelLayout.setVerticalGroup(
             hotelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -552,7 +583,7 @@ public class Main extends javax.swing.JFrame {
                     .addGroup(hotelPanelLayout.createSequentialGroup()
                         .addGap(74, 74, 74)
                         .addComponent(hotelsScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 185, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
                         .addGroup(hotelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(hotelBackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(hotelContButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -754,7 +785,31 @@ public class Main extends javax.swing.JFrame {
 
         DayToursTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
                 "Name", "Price", "Duration", "Description"
@@ -838,7 +893,7 @@ public class Main extends javax.swing.JFrame {
                                                 .addGap(47, 47, 47)
                                                 .addComponent(numberOfAdults, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addComponent(jLabel3)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 664, Short.MAX_VALUE)
                         .addComponent(dayToursScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(dayToursPanelLayout.createSequentialGroup()
                         .addGap(139, 139, 139)
@@ -891,8 +946,8 @@ public class Main extends javax.swing.JFrame {
         flightPanel.setBackground(new java.awt.Color(255, 255, 255));
         flightPanel.setPreferredSize(new java.awt.Dimension(1280, 720));
 
-        flightLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 36)); // NOI18N
-        flightLabel.setText("Flights are currently unavailable :(");
+        flightLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 24)); // NOI18N
+        flightLabel.setText("Flights ");
 
         contButton4.setFont(new java.awt.Font("Microsoft YaHei", 0, 24)); // NOI18N
         contButton4.setText("Continue");
@@ -902,33 +957,185 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        flightsBackButton.setFont(new java.awt.Font("Microsoft YaHei", 0, 24)); // NOI18N
+        flightsBackButton.setText("Back");
+        flightsBackButton.setPreferredSize(new java.awt.Dimension(137, 41));
+        flightsBackButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                flightsBackButtonActionPerformed(evt);
+            }
+        });
+
+        flightContainer.setLayout(new java.awt.GridLayout(0, 2, 10, 10));
+
+        flightFromLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 14)); // NOI18N
+        flightFromLabel.setText("From");
+        flightContainer.add(flightFromLabel);
+
+        flightTo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "KEFLAVIK" }));
+        flightContainer.add(flightTo);
+
+        flightToLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 14)); // NOI18N
+        flightToLabel.setText("To");
+        flightContainer.add(flightToLabel);
+
+        flightFrom.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "PARIS CDG", "Berlin Schoenefeld", "London Gatwick", "Copenhagen", "Munich", "Zurich", "Frankfurt", "Helsinki", "Glasgow", "Stockholm", "London Heathrow", "Brussels", "Amsterdam", "Oslo", "Alicante", "London Luton", "Basel Mulhouse", "Boston", "Baltimore Washington", "Denver", "Washington Dulles", "New York Newark", "Seattle", "New York JFK", "Orlando", "Edinburgh" }));
+        flightContainer.add(flightFrom);
+
+        flightDateLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 14)); // NOI18N
+        flightDateLabel.setText("Date");
+        flightContainer.add(flightDateLabel);
+
+        flightDate.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19. april" }));
+        flightContainer.add(flightDate);
+
+        flightsPrice.setFont(new java.awt.Font("Microsoft YaHei", 0, 14)); // NOI18N
+        flightsPrice.setText("Price ( ISK )");
+
+        flightDash.setFont(new java.awt.Font("Microsoft YaHei", 0, 14)); // NOI18N
+        flightDash.setText("-");
+
+        flightsFromPrice.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "10000", "20000", "30000", "40000", "50000", "60000", "70000", "80000", "90000" }));
+        flightsFromPrice.setMinimumSize(new java.awt.Dimension(61, 20));
+        flightsFromPrice.setPreferredSize(new java.awt.Dimension(61, 20));
+
+        flightsToPrice.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10000", "20000", "30000", "40000", "50000", "60000", "70000", "80000", "90000", "100000" }));
+        flightsToPrice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                flightsToPriceActionPerformed(evt);
+            }
+        });
+
+        flightSearchButton.setFont(new java.awt.Font("Microsoft YaHei", 0, 24)); // NOI18N
+        flightSearchButton.setText("Search");
+        flightSearchButton.setPreferredSize(new java.awt.Dimension(137, 41));
+        flightSearchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                flightSearchButtonActionPerformed(evt);
+            }
+        });
+        
+        flightTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Flight No", "From", "To", "Date", "Price"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        flightsScrollPane.setViewportView(flightTable);
+        if (flightTable.getColumnModel().getColumnCount() > 0) {
+            flightTable.getColumnModel().getColumn(0).setResizable(false);
+            flightTable.getColumnModel().getColumn(1).setResizable(false);
+            flightTable.getColumnModel().getColumn(2).setResizable(false);
+            flightTable.getColumnModel().getColumn(3).setResizable(false);
+            flightTable.getColumnModel().getColumn(4).setResizable(false);
+        }
+
         javax.swing.GroupLayout flightPanelLayout = new javax.swing.GroupLayout(flightPanel);
         flightPanel.setLayout(flightPanelLayout);
         flightPanelLayout.setHorizontalGroup(
             flightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(flightPanelLayout.createSequentialGroup()
+                .addGap(123, 123, 123)
                 .addGroup(flightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(flightPanelLayout.createSequentialGroup()
-                        .addGap(343, 343, 343)
-                        .addComponent(flightLabel))
+                        .addGroup(flightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(flightPanelLayout.createSequentialGroup()
+                                .addComponent(flightsPrice)
+                                .addGap(32, 32, 32)
+                                .addComponent(flightsFromPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(flightDash, javax.swing.GroupLayout.PREFERRED_SIZE, 7, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(flightsToPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(flightContainer, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(flightPanelLayout.createSequentialGroup()
+                                .addGap(94, 94, 94)
+                                .addComponent(flightSearchButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 793, Short.MAX_VALUE)
+                        .addComponent(flightsScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(flightPanelLayout.createSequentialGroup()
-                        .addGap(727, 727, 727)
+                        .addComponent(flightsBackButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(contButton4)))
-                .addContainerGap(356, Short.MAX_VALUE))
+                .addGap(274, 274, 274))
+            .addGroup(flightPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(flightLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         flightPanelLayout.setVerticalGroup(
             flightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(flightPanelLayout.createSequentialGroup()
-                .addGap(239, 239, 239)
+                .addContainerGap()
                 .addComponent(flightLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 304, Short.MAX_VALUE)
-                .addComponent(contButton4)
-                .addGap(87, 87, 87))
+                .addGroup(flightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(flightPanelLayout.createSequentialGroup()
+                        .addGap(94, 94, 94)
+                        .addComponent(flightContainer, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(flightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(flightsPrice)
+                            .addComponent(flightDash)
+                            .addComponent(flightsFromPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(flightsToPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(54, 54, 54)
+                        .addComponent(flightSearchButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(flightPanelLayout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(flightsScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
+                .addGroup(flightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(flightsBackButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(contButton4))
+                .addGap(47, 47, 47))
         );
 
         mainPanel.add(flightPanel, "card10");
 
         resultsPanel.setBackground(new java.awt.Color(255, 255, 255));
+        resultsPanel.setMaximumSize(new java.awt.Dimension(1280, 720));
+        resultsPanel.setMinimumSize(new java.awt.Dimension(1280, 720));
         resultsPanel.setPreferredSize(new java.awt.Dimension(1280, 720));
 
         startPageButton.setFont(new java.awt.Font("Microsoft YaHei", 0, 24)); // NOI18N
@@ -944,6 +1151,28 @@ public class Main extends javax.swing.JFrame {
         resultsBackButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 resultsBackButtonActionPerformed(evt);
+            }
+        });
+
+        tripInfoLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 24)); // NOI18N
+        tripInfoLabel.setText("Your Trip Information");
+
+        hotelInfoLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 20)); // NOI18N
+        hotelInfoLabel.setText("Hotel information");
+
+        dayTourInfoLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 20)); // NOI18N
+        dayTourInfoLabel.setText("Daytour information");
+
+        bookButton.setFont(new java.awt.Font("Microsoft YaHei", 0, 36)); // NOI18N
+        bookButton.setText("Book trip");
+        bookButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+					bookButtonActionPerformed(evt);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         });
 
@@ -1093,82 +1322,130 @@ public class Main extends javax.swing.JFrame {
         dayTourResultPrice.setFocusable(false);
         resultsContainerDayTours.add(dayTourResultPrice);
 
-        tripInfoLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 24)); // NOI18N
-        tripInfoLabel.setText("Your Trip Information");
+        resultsContainerFlights.setLayout(new java.awt.GridLayout(0, 2, 10, 10));
 
-        hotelInfoLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 20)); // NOI18N
-        hotelInfoLabel.setText("Hotel information");
+        flightResultToLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 14)); // NOI18N
+        flightResultToLabel.setText("To");
+        resultsContainerFlights.add(flightResultToLabel);
 
-        dayTourInfoLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 20)); // NOI18N
-        dayTourInfoLabel.setText("Daytour information");
-
-        bookButton.setFont(new java.awt.Font("Microsoft YaHei", 0, 36)); // NOI18N
-        bookButton.setText("Book trip");
-        bookButton.addActionListener(new java.awt.event.ActionListener() {
+        flightResultTo.setEditable(false);
+        flightResultTo.setFocusable(false);
+        flightResultTo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                try {
-					bookButtonActionPerformed(evt);
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+                flightResultToActionPerformed(evt);
             }
         });
+        resultsContainerFlights.add(flightResultTo);
+
+        flightResultFromLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 14)); // NOI18N
+        flightResultFromLabel.setText("From");
+        resultsContainerFlights.add(flightResultFromLabel);
+
+        flightResultFrom.setEditable(false);
+        flightResultFrom.setFocusable(false);
+        resultsContainerFlights.add(flightResultFrom);
+
+        flightResultDateLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 14)); // NOI18N
+        flightResultDateLabel.setText("Date");
+        resultsContainerFlights.add(flightResultDateLabel);
+
+        flightResultDate.setEditable(false);
+        flightResultDate.setFocusable(false);
+        flightResultDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                flightResultDateActionPerformed(evt);
+            }
+        });
+        resultsContainerFlights.add(flightResultDate);
+
+        flightResultNumberLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 14)); // NOI18N
+        flightResultNumberLabel.setText("Flight number");
+        resultsContainerFlights.add(flightResultNumberLabel);
+
+        flightResultNumber.setEditable(false);
+        flightResultNumber.setFocusable(false);
+        flightResultNumber.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                flightResultNumberActionPerformed(evt);
+            }
+        });
+        resultsContainerFlights.add(flightResultNumber);
+
+        flightResultPriceLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 14)); // NOI18N
+        flightResultPriceLabel.setText("Price ( ISK )");
+        resultsContainerFlights.add(flightResultPriceLabel);
+
+        flightResultPrice.setEditable(false);
+        flightResultPrice.setFocusable(false);
+        resultsContainerFlights.add(flightResultPrice);
+
+        flightInfoLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 20)); // NOI18N
+        flightInfoLabel.setText("Flight information");
 
         javax.swing.GroupLayout resultsPanelLayout = new javax.swing.GroupLayout(resultsPanel);
         resultsPanel.setLayout(resultsPanelLayout);
         resultsPanelLayout.setHorizontalGroup(
             resultsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, resultsPanelLayout.createSequentialGroup()
+            .addGroup(resultsPanelLayout.createSequentialGroup()
                 .addGap(86, 86, 86)
-                .addComponent(resultsBackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(startPageButton)
-                .addGap(20, 20, 20))
-            .addGroup(resultsPanelLayout.createSequentialGroup()
-                .addGap(243, 243, 243)
-                .addComponent(hotelInfoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(dayTourInfoLabel)
-                .addGap(276, 276, 276))
-            .addGroup(resultsPanelLayout.createSequentialGroup()
                 .addGroup(resultsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(resultsPanelLayout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(tripInfoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(resultsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(resultsPanelLayout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addGroup(resultsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tripInfoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(resultsPanelLayout.createSequentialGroup()
+                                        .addGap(43, 43, 43)
+                                        .addComponent(flightInfoLabel)))
+                                .addGap(220, 220, 220)
+                                .addComponent(hotelInfoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(329, 329, 329)
+                                .addComponent(dayTourInfoLabel))
+                            .addGroup(resultsPanelLayout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addComponent(resultsContainerFlights, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(109, 109, 109)
+                                .addComponent(resultsContainerHotels, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(100, 100, 100)
+                                .addComponent(resultsContainerDayTours, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(383, Short.MAX_VALUE))
                     .addGroup(resultsPanelLayout.createSequentialGroup()
-                        .addGap(119, 119, 119)
-                        .addComponent(resultsContainerHotels, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(171, 171, 171)
-                        .addComponent(resultsContainerDayTours, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(resultsPanelLayout.createSequentialGroup()
-                        .addGap(534, 534, 534)
-                        .addComponent(bookButton)))
-                .addContainerGap(102, Short.MAX_VALUE))
+                        .addComponent(resultsBackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(startPageButton)
+                        .addGap(20, 20, 20))))
+            .addGroup(resultsPanelLayout.createSequentialGroup()
+                .addGap(609, 609, 609)
+                .addComponent(bookButton)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         resultsPanelLayout.setVerticalGroup(
             resultsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, resultsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(tripInfoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(99, 99, 99)
+                .addGap(94, 94, 94)
+                .addGroup(resultsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(hotelInfoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dayTourInfoLabel)
+                    .addComponent(flightInfoLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(resultsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(resultsPanelLayout.createSequentialGroup()
-                        .addComponent(hotelInfoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)
                         .addGroup(resultsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(resultsContainerHotels, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(resultsContainerDayTours, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                        .addGap(61, 61, 61)
                         .addComponent(bookButton, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(104, 104, 104)
+                        .addContainerGap(120, Short.MAX_VALUE))
+                    .addGroup(resultsPanelLayout.createSequentialGroup()
+                        .addComponent(resultsContainerFlights, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(resultsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(startPageButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(resultsBackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(36, 36, 36))
-                    .addGroup(resultsPanelLayout.createSequentialGroup()
-                        .addComponent(dayTourInfoLabel)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(36, 36, 36))))
         );
 
         resultsBackButton.getAccessibleContext().setAccessibleName("resultsBackButton");
@@ -1181,31 +1458,32 @@ public class Main extends javax.swing.JFrame {
         bookingNumberLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 36)); // NOI18N
         bookingNumberLabel.setText("Your booking number");
 
-        bookingNumber.setFont(new java.awt.Font("Microsoft YaHei", 0, 48)); // NOI18N
         bookingNumber.setEditable(false);
+        bookingNumber.setFont(new java.awt.Font("Microsoft YaHei", 0, 48)); // NOI18N
+        bookingNumber.setFocusable(false);
 
         javax.swing.GroupLayout bookingNumberPanelLayout = new javax.swing.GroupLayout(bookingNumberPanel);
         bookingNumberPanel.setLayout(bookingNumberPanelLayout);
         bookingNumberPanelLayout.setHorizontalGroup(
             bookingNumberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bookingNumberPanelLayout.createSequentialGroup()
-                .addContainerGap(330, Short.MAX_VALUE)
+                .addContainerGap(872, Short.MAX_VALUE)
                 .addGroup(bookingNumberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bookingNumberPanelLayout.createSequentialGroup()
-                        .addComponent(bookingNumberLabel)
-                        .addGap(423, 423, 423))
+                        .addComponent(bookingNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(593, 593, 593))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bookingNumberPanelLayout.createSequentialGroup()
-                        .addComponent(bookingNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 608, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(306, 306, 306))))
+                        .addComponent(bookingNumberLabel)
+                        .addGap(613, 613, 613))))
         );
         bookingNumberPanelLayout.setVerticalGroup(
             bookingNumberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bookingNumberPanelLayout.createSequentialGroup()
-                .addGap(177, 177, 177)
+                .addGap(188, 188, 188)
                 .addComponent(bookingNumberLabel)
-                .addGap(18, 18, 18)
-                .addComponent(bookingNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(433, Short.MAX_VALUE))
+                .addGap(73, 73, 73)
+                .addComponent(bookingNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(293, Short.MAX_VALUE))
         );
 
         mainPanel.add(bookingNumberPanel, "card7");
@@ -1214,7 +1492,7 @@ public class Main extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1891, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1262,11 +1540,37 @@ public class Main extends javax.swing.JFrame {
             dayToursPanel.setVisible(true);
             hotelPanel.setVisible(false);
             PriceRadioButton.setSelected(true);
-        } 
+        }    
         else {
-        	resultsPanel.setVisible(true);
-        	hotelPanel.setVisible(false);
-        }System.out.println(HotelsTable.getSelectedRow());
+            resultsPanel.setVisible(true);
+            hotelPanel.setVisible(false);
+        }
+        int i = HotelsTable.getSelectedRow();
+        hotelResultName.setText(logic.GetHotelData().getHotels()[i].getName());
+        hotelResultPostal.setText(logic.GetHotelData().getHotels()[i].getPostalCode());
+        hotelResultStars.setText(Integer.toString(logic.GetHotelData().getHotels()[i].getStars()));
+        hotelResultDate.setText(arrivalDate.getText());
+        hotelResultNumberOfNights.setText(Integer.toString(nights.getSelectedIndex()+1));
+        hotelResultNumberOfRooms.setText(Integer.toString(onePers.getSelectedIndex() + twoPers.getSelectedIndex() + threePers.getSelectedIndex() + fourPers.getSelectedIndex()));
+        hotelResultPrice.setText(Integer.toString((nights.getSelectedIndex()+1)*(onePers.getSelectedIndex() + 2*threePers.getSelectedIndex() + 3*twoPers.getSelectedIndex() + 4*fourPers.getSelectedIndex())
+        		*logic.GetHotelData().getHotels()[i].getPrice()));
+        hotelResultNumberOfGuests.setText(Integer.toString(onePers.getSelectedIndex() + 2*threePers.getSelectedIndex() + 3*twoPers.getSelectedIndex() + 4*fourPers.getSelectedIndex()));
+        System.out.println(onePers.getSelectedIndex());
+        System.out.println(twoPers.getSelectedItem());
+        System.out.println(threePers.getSelectedIndex());
+        System.out.println(fourPers.getSelectedIndex());
+    }//GEN-LAST:event_hotelContButtonActionPerformed
+
+    private void hotelBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hotelBackButtonActionPerformed
+        if(FlightCheckbox.isSelected()){
+            flightPanel.setVisible(true);
+            hotelPanel.setVisible(false);
+            
+        }
+        else {
+            resultsPanel.setVisible(true);
+            hotelPanel.setVisible(false);
+        }
         int i = HotelsTable.getSelectedRow();
         hotelResultName.setText(logic.GetHotelData().getHotels()[i].getName());
         hotelResultPostal.setText(logic.GetHotelData().getHotels()[i].getPostalCode());
@@ -1277,20 +1581,14 @@ public class Main extends javax.swing.JFrame {
         hotelResultPrice.setText(Integer.toString(logic.GetHotelData().getHotels()[i].getPrice()));
         hotelResultNumberOfGuests.setText(Integer.toString(onePers.getSelectedIndex() + 2*twoPers.getSelectedIndex() + 3*threePers.getSelectedIndex() + 4*fourPers.getSelectedIndex()));
         
-    }//GEN-LAST:event_hotelContButtonActionPerformed
-
-    private void hotelBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hotelBackButtonActionPerformed
-        if(FlightCheckbox.isSelected()){
-            flightPanel.setVisible(true);
-            hotelPanel.setVisible(false);
-            
-        }
         
         
     }//GEN-LAST:event_hotelBackButtonActionPerformed
 
     private void contButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contButton4ActionPerformed
         
+    	
+    	
         if(HotelCheckbox.isSelected()){
             hotelPanel.setVisible(true);
             flightPanel.setVisible(false);
@@ -1302,6 +1600,20 @@ public class Main extends javax.swing.JFrame {
             PriceRadioButton.setSelected(true);
             
         }
+         else{
+             
+             flightPanel.setVisible(false);
+             resultsPanel.setVisible(true);
+         }
+        int i = flightTable.getSelectedRow();
+        flightResultFrom.setText(flightTo.getSelectedItem().toString());
+        flightResultTo.setText(logic.GetFlightData().getFlight()[i].getDestination());
+        flightResultDate.setText(logic.GetFlightData().getFlight()[i].getDate());
+        flightResultNumber.setText(logic.GetFlightData().getFlight()[i].getFlightNr());
+        flightResultPrice.setText(Double.toString(Math.round(logic.GetFlightData().getFlight()[i].getPrice())));
+        
+        
+        
         
     }//GEN-LAST:event_contButton4ActionPerformed
 
@@ -1332,128 +1644,191 @@ public class Main extends javax.swing.JFrame {
     private void jCheckBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox4ActionPerformed
-    
 
-    
-    private DefaultTableModel reset(){
-        
-        if(model!=null){
-            try{
-                int radir = model.getRowCount();
-                for(int i = radir-1; i >= 0; i--){
-                    model.removeRow(i);
-                }
-            }catch (Exception ex) {
-            }
+    private void clearTable(JTable table){
+        selectRows(table, 0, table.getRowCount());
+        int rows[] = table.getSelectedRows();
+        while(rows.length > 0){
+            ((DefaultTableModel)table.getModel()).removeRow(table.convertRowIndexToModel(rows[0]));
+            rows = table.getSelectedRows();
         }
-        return model;
+        table.clearSelection();
+    }
+    
+    private void selectRows(JTable table, int start, int end) {
+        table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        table.setRowSelectionAllowed(true);
+        table.setRowSelectionInterval(start, end - 1);
     }
     
     
-    
     private void DayTourSearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DayTourSearchButtonActionPerformed
-    	boolean[] check = new boolean[7];
-    	reset();
+    	if(DayToursTable.getSelectedRow() != 0 ) {
+    		clearTable(DayToursTable);
+    	}
     	
-    	System.out.println(dayToursMinPrice.getText().isEmpty());
-    	if (PriceRadioButton.isSelected()) {
-    		if(dayToursMinPrice.getText().isEmpty()){
-    			logic.GetDayToursData().setMinPrice(0);
-    		}
-    		else {
-    			logic.GetDayToursData().setMinPrice(Integer.parseInt(dayToursMinPrice.getText()));
-    		}
-    		if(dayToursMaxPrice.getText().isEmpty()) {
-    			logic.GetDayToursData().setMaxPrice(1000000);
-    		}
-    		else {
-    			logic.GetDayToursData().setMaxPrice(Integer.parseInt(dayToursMaxPrice.getText()));
-    		}
-    		logic.GetDayToursData().setSearchBy(0);
-    		logic.DayTourSearch();
-    	}
-    	if (AgeRadioButton.isSelected()) {
-    		if (ageRestriction.getText().isEmpty()) {
-    			logic.GetDayToursData().setAgeRestriction(100);
-    		}
-    		else {
-    			logic.GetDayToursData().setAgeRestriction(Integer.parseInt(ageRestriction.getText()));
-    		}
-    		logic.GetDayToursData().setSearchBy(1);
-    		logic.DayTourSearch();
-    	}
-    	if (LocationRadioButton.isSelected()) {
-    			logic.GetDayToursData().setLocation(dayToursLocation.getSelectedItem().toString());
-    		logic.GetDayToursData().setSearchBy(2);
-    		logic.DayTourSearch();
-    	}
-    	if (StarsRadioButton.isSelected()) {
-    		logic.GetDayToursData().setStars(minStars.getSelectedIndex());
-    		logic.GetDayToursData().setSearchBy(3);
-    		logic.DayTourSearch();
-    	}
-    	if (DepartureRadioButton.isSelected()) {
-    		if (dayToursDeparture.getText().isEmpty()) {
-    			logic.GetDayToursData().setDepartureTime("18:30");
-    		}
-    		else {
-    			logic.GetDayToursData().setDepartureTime(dayToursDeparture.getText());
-    		}
-    		
-    		logic.GetDayToursData().setSearchBy(4);
-    		logic.DayTourSearch();
-    	}
-    	if (SeatsRadioButton.isSelected()) {
-    		logic.GetDayToursData().setSeatsAvailable(seatsAvailable.getSelectedIndex());
-    		logic.GetDayToursData().setSearchBy(5);
-    		logic.DayTourSearch();
-    	}
-    	if (jRadioButton7.isSelected()) {
-    		check[0] = jCheckBox1.isSelected();
-    		check[1] = jCheckBox2.isSelected();
-    		check[2] = jCheckBox3.isSelected();
-    		check[3] = jCheckBox4.isSelected();
-    		check[4] = jCheckBox5.isSelected();
-    		check[5] = jCheckBox6.isSelected();
-    		check[6] = jCheckBox7.isSelected();
-    		logic.GetDayToursData().setDaysOfWeek(check);
-    		logic.GetDayToursData().setSearchBy(6);
-    		logic.DayTourSearch();
-    	}
-    	for(int i=0; i<25; i++) {
-    		if(i < logic.GetDayToursData().getTours().length) {
-    			String name = logic.GetDayToursData().getTours()[i].getName();
-    			String price = Integer.toString(logic.GetDayToursData().getTours()[i].getPrice());
-    			String duration = logic.GetDayToursData().getTours()[i].getDuration();
-    			String description = logic.GetDayToursData().getTours()[i].getDescription();
-    			String[] rowData = new String[4];
-    			rowData[0] = name;
-    			rowData[1] = price;
-    			rowData[2] = duration;
-    			rowData[3] = description;
-    			model.addRow(rowData);
-    		}
-    	}
+         DayToursTable = emptyTable2;
+         DefaultTableModel DayTourModel = (DefaultTableModel) DayToursTable.getModel();
+         
+         boolean[] check = new boolean[7];
+         
+         
+         System.out.println(dayToursMinPrice.getText().isEmpty());
+         if (PriceRadioButton.isSelected()) {
+             if(dayToursMinPrice.getText().isEmpty()){
+                 logic.GetDayToursData().setMinPrice(0);
+             }
+             else {
+                 logic.GetDayToursData().setMinPrice(Integer.parseInt(dayToursMinPrice.getText()));
+             }
+             if(dayToursMaxPrice.getText().isEmpty()) {
+                 logic.GetDayToursData().setMaxPrice(1000000);
+             }
+             else {
+                 logic.GetDayToursData().setMaxPrice(Integer.parseInt(dayToursMaxPrice.getText()));
+             }
+             logic.GetDayToursData().setSearchBy(0);
+             logic.DayTourSearch();
+         }
+         if (AgeRadioButton.isSelected()) {
+             if (ageRestriction.getText().isEmpty()) {
+                 logic.GetDayToursData().setAgeRestriction(100);
+             }
+             else {
+                 logic.GetDayToursData().setAgeRestriction(Integer.parseInt(ageRestriction.getText()));
+             }
+             logic.GetDayToursData().setSearchBy(1);
+             logic.DayTourSearch();
+         }
+         if (LocationRadioButton.isSelected()) {
+                 logic.GetDayToursData().setLocation(dayToursLocation.getSelectedItem().toString());
+             logic.GetDayToursData().setSearchBy(2);
+             logic.DayTourSearch();
+         }
+         if (StarsRadioButton.isSelected()) {
+             logic.GetDayToursData().setStars(minStars.getSelectedIndex());
+             logic.GetDayToursData().setSearchBy(3);
+             logic.DayTourSearch();
+         }
+         if (DepartureRadioButton.isSelected()) {
+             if (dayToursDeparture.getText().isEmpty()) {
+                 logic.GetDayToursData().setDepartureTime("18:30");
+             }
+             else {
+                 logic.GetDayToursData().setDepartureTime(dayToursDeparture.getText());
+             }
+             
+             logic.GetDayToursData().setSearchBy(4);
+             logic.DayTourSearch();
+         }
+         if (SeatsRadioButton.isSelected()) {
+             logic.GetDayToursData().setSeatsAvailable(seatsAvailable.getSelectedIndex());
+             logic.GetDayToursData().setSearchBy(5);
+             logic.DayTourSearch();
+         }
+         if (jRadioButton7.isSelected()) {
+             check[0] = jCheckBox1.isSelected();
+             check[1] = jCheckBox2.isSelected();
+             check[2] = jCheckBox3.isSelected();
+             check[3] = jCheckBox4.isSelected();
+             check[4] = jCheckBox5.isSelected();
+             check[5] = jCheckBox6.isSelected();
+             check[6] = jCheckBox7.isSelected();
+             logic.GetDayToursData().setDaysOfWeek(check);
+             logic.GetDayToursData().setSearchBy(6);
+             logic.DayTourSearch();
+         }
+         for(int i=0; i<25; i++) {
+             if(i < logic.GetDayToursData().getTours().length) {
+                 String name = logic.GetDayToursData().getTours()[i].getName();
+                 String price = Integer.toString(logic.GetDayToursData().getTours()[i].getPrice());
+                 String duration = logic.GetDayToursData().getTours()[i].getDuration();
+                 String description = logic.GetDayToursData().getTours()[i].getDescription();
+                 String[] rowData = new String[4];
+                 rowData[0] = name;
+                 rowData[1] = price;
+                 rowData[2] = duration;
+                 rowData[3] = description;
+                 DayTourModel.addRow(rowData);
+                 //System.out.println(Arrays.toString(rowData));
+             }
+         }
     }//GEN-LAST:event_DayTourSearchButtonActionPerformed
 
-    private void hotelSearchButtonActionPerformed(java.awt.event.ActionEvent evt) throws NumberFormatException, ParseException, IOException {//GEN-FIRST:event_hotelSearchButtonActionPerformed
-    	int[] arr = new int[4];
-    	arr[0] = onePers.getSelectedIndex();
-    	arr[1] = twoPers.getSelectedIndex();
-    	arr[2] = threePers.getSelectedIndex();
-    	arr[3] = fourPers.getSelectedIndex();
-    	if (maxPrice.getText().isEmpty()) {
-    		maxPrice.setText("-1");
+    public static String getBookingId() {
+        StringBuilder randomString = new StringBuilder();
+        Random random = new Random();
+
+        String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        for(int i = 0; i < 6; i++) {
+            randomString.append(alphabet.charAt(random.nextInt(alphabet.length())));
+        }
+
+        return randomString.toString();
+    }
+    
+    private void flightSearchButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    	if(flightTable.getRowCount() != 0) {
+    		clearTable(flightTable);
     	}
-    	logic.HotelSearch(hotelLocation.getText(), arrivalDate.getText(), hotelName.getText(), nights.getSelectedIndex(), stars.getSelectedIndex(), Integer.parseInt(maxPrice.getText()), arr);
+    	flightTable = emptyTable3;
+    	DefaultTableModel FlightModel = (DefaultTableModel) flightTable.getModel();
+    	
+    	System.out.println(Double.parseDouble(flightsFromPrice.getSelectedItem().toString()));
+    	
+    	logic.FlightSearch(Double.parseDouble(flightsFromPrice.getSelectedItem().toString()), Double.parseDouble(flightsToPrice.getSelectedItem().toString()), flightDate.getSelectedItem().toString(), flightFrom.getSelectedItem().toString());
+        
+    	
     	for(int i=0; i < 25; i++) {
-    		if(i < logic.GetHotelData().getHotels().length) {
-    			HotelsTable.setValueAt(logic.GetHotelData().getHotels()[i].getName(), i, 0);
-    			HotelsTable.setValueAt(logic.GetHotelData().getHotels()[i].getStars(), i, 1);
-    			HotelsTable.setValueAt(logic.GetHotelData().getHotels()[i].getPrice(), i, 2);
-    			HotelsTable.setValueAt(logic.GetHotelData().getHotels()[i].getPostalCode(), i, 3);
-    		}
+            if(i < logic.GetFlightData().getFlight().length) {
+                String flightNo = logic.GetFlightData().getFlight()[i].getFlightNr();
+                String from = flightFrom.getSelectedItem().toString();
+                String to = logic.GetFlightData().getFlight()[i].getDestination();
+                String date = logic.GetFlightData().getFlight()[i].getDate();
+                String price = Double.toString(Math.round(logic.GetFlightData().getFlight()[i].getPrice()));
+                String[] rowData = new String[5];
+                rowData[0] = flightNo;
+                rowData[1] = from;
+                rowData[2] = to;
+                rowData[3] = date;
+                rowData[4] = price;
+                FlightModel.addRow(rowData);
+            }
+        }
+    	
+    }
+    
+    
+    private void hotelSearchButtonActionPerformed(java.awt.event.ActionEvent evt) throws NumberFormatException, ParseException, IOException {//GEN-FIRST:event_hotelSearchButtonActionPerformed
+    	if(HotelsTable.getRowCount() != 0) {
+    		clearTable(HotelsTable);
     	}
+    	
+        HotelsTable = emptyTable;
+        DefaultTableModel HotelModel = (DefaultTableModel) HotelsTable.getModel(); 
+        int[] arr = new int[4];
+        arr[0] = onePers.getSelectedIndex();
+        arr[1] = twoPers.getSelectedIndex();
+        arr[2] = threePers.getSelectedIndex();
+        arr[3] = fourPers.getSelectedIndex();
+        if (maxPrice.getText().isEmpty()) {
+            maxPrice.setText("-1");
+        }
+        logic.HotelSearch(hotelLocation.getText(), arrivalDate.getText(), hotelName.getText(), nights.getSelectedIndex(), stars.getSelectedIndex(), Integer.parseInt(maxPrice.getText()), arr);
+        for(int i=0; i < 25; i++) {
+            if(i < logic.GetHotelData().getHotels().length) {
+                String name = logic.GetHotelData().getHotels()[i].getName();
+                String stars = Integer.toString(logic.GetHotelData().getHotels()[i].getStars());
+                String price = Integer.toString(logic.GetHotelData().getHotels()[i].getPrice());
+                String postal = logic.GetHotelData().getHotels()[i].getPostalCode();
+                String[] rowData = new String[4];
+                rowData[0] = name;
+                rowData[1] = stars;
+                rowData[2] = price;
+                rowData[3] = postal;
+                HotelModel.addRow(rowData);
+            }
+        }
     }//GEN-LAST:event_hotelSearchButtonActionPerformed
 
     private void dayToursContButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dayToursContButtonActionPerformed
@@ -1466,23 +1841,10 @@ public class Main extends javax.swing.JFrame {
         dayTourResultDuration.setText(logic.GetDayToursData().getTours()[i].getDuration());
         dayTourResultNumberOfSeats.setText(Integer.toString(numberOfAdults.getSelectedIndex() + numberOfChildren.getSelectedIndex()));
         dayTourResultName.setText(logic.GetDayToursData().getTours()[i].getName());
-        dayTourResultPrice.setText(Integer.toString(logic.GetDayToursData().getTours()[i].getPrice()));
+        dayTourResultPrice.setText(Integer.toString((numberOfAdults.getSelectedIndex() + numberOfChildren.getSelectedIndex())*logic.GetDayToursData().getTours()[i].getPrice()));
         
     }//GEN-LAST:event_dayToursContButtonActionPerformed
 
-	public static String getBookingId() {
-  		StringBuilder randomString = new StringBuilder();
-  		Random random = new Random();
-
-		String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-		for(int i = 0; i < 6; i++) {
-			randomString.append(alphabet.charAt(random.nextInt(alphabet.length())));
-		}
-
-		return randomString.toString();
-	}
-    
-    
     private void dayToursBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dayToursBackButtonActionPerformed
         
          if(HotelCheckbox.isSelected()){
@@ -1528,14 +1890,6 @@ public class Main extends javax.swing.JFrame {
 
     }//GEN-LAST:event_startPageButtonActionPerformed
 
-    private void hotelResultStarsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hotelResultStarsActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_hotelResultStarsActionPerformed
-
-    private void hotelResultNumberOfNightsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hotelResultNumberOfNightsActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_hotelResultNumberOfNightsActionPerformed
-
     private void dayTourResultLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dayTourResultLocationActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_dayTourResultLocationActionPerformed
@@ -1549,15 +1903,46 @@ public class Main extends javax.swing.JFrame {
         int i = HotelsTable.getSelectedRow();
         int j = DayToursTable.getSelectedRow();
         bookingNumber.setText(bookNumber);
-    	if(HotelCheckbox.isSelected()) {
-    		logic.BookHotel(bookNumber, i);
-    	}
-    	if(DayToursCheckbox.isSelected()) {
-    		logic.BookDayTour(numberOfAdults.getSelectedIndex(), numberOfChildren.getSelectedIndex(), bookNumber, j);
-    	}
+        if(HotelCheckbox.isSelected()) {
+            logic.BookHotel(bookNumber, i);
+        }
+        if(DayToursCheckbox.isSelected()) {
+            logic.BookDayTour(numberOfAdults.getSelectedIndex(), numberOfChildren.getSelectedIndex(), bookNumber, j);
+        }
     	resultsPanel.setVisible(false);
         bookingNumberPanel.setVisible(true);
     }//GEN-LAST:event_bookButtonActionPerformed
+
+    private void flightsToPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_flightsToPriceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_flightsToPriceActionPerformed
+
+    private void hotelResultNumberOfNightsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hotelResultNumberOfNightsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_hotelResultNumberOfNightsActionPerformed
+
+    private void hotelResultStarsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hotelResultStarsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_hotelResultStarsActionPerformed
+
+    private void flightResultToActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_flightResultToActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_flightResultToActionPerformed
+
+    private void flightResultDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_flightResultDateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_flightResultDateActionPerformed
+
+    private void flightResultNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_flightResultNumberActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_flightResultNumberActionPerformed
+
+    private void flightsBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_flightsBackButtonActionPerformed
+        
+        bookPanel.setVisible(true);
+        flightPanel.setVisible(false);
+        
+    }//GEN-LAST:event_flightsBackButtonActionPerformed
 
 
     
@@ -1653,8 +2038,34 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField dayToursMinPrice;
     private javax.swing.JPanel dayToursPanel;
     private javax.swing.JScrollPane dayToursScrollPane;
+    private javax.swing.JLayeredPane flightContainer;
+    private javax.swing.JLabel flightDash;
+    private javax.swing.JComboBox flightDate;
+    private javax.swing.JLabel flightDateLabel;
+    private javax.swing.JComboBox flightFrom;
+    private javax.swing.JLabel flightFromLabel;
+    private javax.swing.JLabel flightInfoLabel;
     private javax.swing.JLabel flightLabel;
     private javax.swing.JPanel flightPanel;
+    private javax.swing.JTextField flightResultDate;
+    private javax.swing.JLabel flightResultDateLabel;
+    private javax.swing.JTextField flightResultFrom;
+    private javax.swing.JLabel flightResultFromLabel;
+    private javax.swing.JTextField flightResultNumber;
+    private javax.swing.JLabel flightResultNumberLabel;
+    private javax.swing.JTextField flightResultPrice;
+    private javax.swing.JLabel flightResultPriceLabel;
+    private javax.swing.JTextField flightResultTo;
+    private javax.swing.JLabel flightResultToLabel;
+    private javax.swing.JButton flightSearchButton;
+    private javax.swing.JTable flightTable;
+    private javax.swing.JComboBox flightTo;
+    private javax.swing.JLabel flightToLabel;
+    private javax.swing.JButton flightsBackButton;
+    private javax.swing.JComboBox flightsFromPrice;
+    private javax.swing.JLabel flightsPrice;
+    private javax.swing.JScrollPane flightsScrollPane;
+    private javax.swing.JComboBox flightsToPrice;
     private javax.swing.JComboBox fourPers;
     private javax.swing.JLabel fourPersLabel;
     private javax.swing.JLabel fromTo;
@@ -1710,6 +2121,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel priceLabel;
     private javax.swing.JButton resultsBackButton;
     private javax.swing.JLayeredPane resultsContainerDayTours;
+    private javax.swing.JLayeredPane resultsContainerFlights;
     private javax.swing.JLayeredPane resultsContainerHotels;
     private javax.swing.JPanel resultsPanel;
     private javax.swing.JComboBox seatsAvailable;
@@ -1722,5 +2134,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel tripInfoLabel;
     private javax.swing.JComboBox twoPers;
     private javax.swing.JLabel twoPersLabel;
+    private javax.swing.JTable emptyTable3;
+    private javax.swing.JTable emptyTable;
+    private javax.swing.JTable emptyTable2;
     // End of variables declaration//GEN-END:variables
 }

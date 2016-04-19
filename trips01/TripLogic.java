@@ -11,6 +11,7 @@ public class TripLogic {
 	private HotelsData hotelsData;
 	private DayToursData toursData;
 	private TripData tripData;
+	private FlightsData flightData;
 	
 	
 	public TripLogic() {
@@ -22,6 +23,10 @@ public class TripLogic {
 		hotelsData.search();
 	}
 	
+	public void FlightSearch(double minPrice, double maxPrice, String date, String dest) {
+		flightData = new FlightsData(minPrice, maxPrice, date, dest);
+		flightData.search();
+	}
 	
 	public void DayTourSearch () {
 		toursData.search();
@@ -34,6 +39,10 @@ public class TripLogic {
 	
 	public DayToursData GetDayToursData() {
 		return toursData;
+	}
+	
+	public FlightsData GetFlightData() {
+		return flightData;
 	}
 	
 	

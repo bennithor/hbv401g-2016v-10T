@@ -1,12 +1,45 @@
 package trips01;
+import flightSearch.*;
 
 public class FlightsData {
 	
-	private String location;
 	private String destination;
 	private String date;
+	private double minPrice;
+	private double maxPrice;
+	private FlightSearch session = new FlightSearch();
+	private Flight[] flights;
 	
-	public String findFlights() {
+	public Flight[] getFlight() {
+		return flights;
+	}
+	
+	public void search() {
+		System.out.println(date + " " + destination);
+		System.out.println(minPrice);
+		System.out.println(maxPrice);
+		session.setDate(date);
+		session.setDestination(destination);
+		session.setPriceRange(minPrice, maxPrice);
+		flights = session.search();
+	}
+	
+	
+	
+	
+	public FlightsData(double _minPrice, double _maxPrice, String _date, String _destination) {
+		destination = _destination;
+		date = _date;
+		minPrice = _minPrice;
+		maxPrice = _maxPrice;
+	}
+	
+	
+	
+	
+	
+	
+/*	public String findFlights() {
 		if(location.equalsIgnoreCase("Rome") && destination.equalsIgnoreCase("Iceland")) {
 			if(date.equalsIgnoreCase("14.03.16")) {
 				return "Flight A732";
@@ -28,16 +61,6 @@ public class FlightsData {
 		else return "No flights to that place";
 	}
 	
-	
-	
-	public void setDate(String _date) {
-		date = _date;
-	}
-	
-	public FlightsData(String _date, String loc, String dest) {
-		date = _date;
-		location = loc;
-		destination = dest;
-	}
+	*/
 
 }
