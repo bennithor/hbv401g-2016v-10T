@@ -9,8 +9,8 @@ public class TripData {
 	private String toIceland;  //Flight
 	private String fromIceland; //Flight
 	private float totalPrice;
-	private Hotel[] hotelsToStay; //Hotels
-	private DayTours[] tours; //Daytours
+	private Hotel hotelsToStay; //Hotels
+	private DayTours tours; //Daytours
 	private String location;
 	private String destination;
 	private int numberOfPeople;
@@ -56,19 +56,19 @@ public class TripData {
 		totalPrice += price;
 	}
 	
-	public Hotel[] getHotelsToStay() {
+	public Hotel getHotelsToStay() {
 		return hotelsToStay;
 	}
 	
-	public void setHotelsToStay(Hotel[] hotels) {
+	public void setHotelsToStay(Hotel hotels) {
 		hotelsToStay = hotels;
 	}
 	
-	public DayTours[] getTours() {
+	public DayTours getTours() {
 		return tours;
 	}
 	
-	public void setTours(DayTours[] dayTours) {
+	public void setTours(DayTours dayTours) {
 		tours = dayTours;
 	}
 	

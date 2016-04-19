@@ -12,6 +12,9 @@ import java.text.ParseException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -24,6 +27,7 @@ public class Main extends javax.swing.JFrame {
      */
     
 	TripLogic logic = new TripLogic();
+	
     
     
 
@@ -43,7 +47,7 @@ public class Main extends javax.swing.JFrame {
 
         
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -503,6 +507,11 @@ public class Main extends javax.swing.JFrame {
 
         contButton3.setFont(new java.awt.Font("Microsoft YaHei", 0, 24)); // NOI18N
         contButton3.setText("Continue");
+        contButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                contButton3ActionPerformed(evt);
+            }
+        });
 
         dayToursContainer1.setLayout(new java.awt.GridLayout(0, 2, 10, 15));
 
@@ -671,31 +680,7 @@ public class Main extends javax.swing.JFrame {
 
         DayToursTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Name", "Price", "Duration", "Description", "Selected"
@@ -866,6 +851,7 @@ public class Main extends javax.swing.JFrame {
             hotelPanel.setVisible(false);
             jRadioButton1.setSelected(true);
         }    
+        System.out.println(HotelsTable.getSelectedRow());
         
         
     }//GEN-LAST:event_contButton2ActionPerformed
@@ -880,8 +866,11 @@ public class Main extends javax.swing.JFrame {
         
     }//GEN-LAST:event_backButton1ActionPerformed
 
+    private void contButton3ActionPerformed(java.awt.event.ActionEvent evt) {
+    	clearTable();
+    }
+    
     private void contButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contButton4ActionPerformed
-        
         if(HotelCheckbox.isSelected()){
             hotelPanel.setVisible(true);
             flightPanel.setVisible(false);
@@ -928,23 +917,65 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox4ActionPerformed
 
+    
+    private void clearTable(){
+    	selectRows(DayToursTable, 0, DayToursTable.getRowCount());
+    	int rows[] = DayToursTable.getSelectedRows();
+    	while(rows.length > 0){
+    		((DefaultTableModel)DayToursTable.getModel()).removeRow(DayToursTable.convertRowIndexToModel(rows[0]));
+    		rows = DayToursTable.getSelectedRows();
+    	}
+    	DayToursTable.clearSelection();
+    }
+    
+    private void selectRows(JTable table, int start, int end) {
+        // Use this mode to demonstrate the following examples
+        table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        // Needs to be set or rows cannot be selected
+        table.setRowSelectionAllowed(true);
+        // Select rows from start to end if start is 0 we change to 1 or leave it (used to preserve coloums headers)
+        table.setRowSelectionInterval(start, end - 1);
+    }
+    
     private void DayTourSearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DayTourSearchButtonActionPerformed
     	boolean[] check = new boolean[7];
+    	DefaultTableModel model = (DefaultTableModel) DayToursTable.getModel();
     	
     	
+    	System.out.println(jTextField1.getText().isEmpty());
     	if (jRadioButton1.isSelected()) {
-    		logic.GetDayToursData().setMinPrice(Integer.parseInt(jTextField1.getText()));
-    		logic.GetDayToursData().setMaxPrice(Integer.parseInt(jTextField5.getText()));
+    		if(jTextField1.getText().isEmpty()){
+    			logic.GetDayToursData().setMinPrice(0);
+    		}
+    		else {
+    			logic.GetDayToursData().setMinPrice(Integer.parseInt(jTextField1.getText()));
+    		}
+    		if(jTextField5.getText().isEmpty()) {
+    			logic.GetDayToursData().setMaxPrice(1000000);
+    		}
+    		else {
+    			logic.GetDayToursData().setMaxPrice(Integer.parseInt(jTextField5.getText()));
+    		}
     		logic.GetDayToursData().setSearchBy(0);
     		logic.DayTourSearch();
     	}
     	if (jRadioButton2.isSelected()) {
-    		logic.GetDayToursData().setAgeRestriction(Integer.parseInt(jTextField2.getText()));
+    		if (jTextField2.getText().isEmpty()) {
+    			logic.GetDayToursData().setAgeRestriction(100);
+    		}
+    		else {
+    			logic.GetDayToursData().setAgeRestriction(Integer.parseInt(jTextField2.getText()));
+    		}
     		logic.GetDayToursData().setSearchBy(1);
     		logic.DayTourSearch();
     	}
     	if (jRadioButton3.isSelected()) {
-    		logic.GetDayToursData().setLocation(jTextField3.getText());
+    		if(jTextField3.getText().isEmpty()) {
+    			logic.GetDayToursData().setLocation("SW");
+    		}
+    		else {
+    			logic.GetDayToursData().setLocation(jTextField3.getText());
+    		}
     		logic.GetDayToursData().setSearchBy(2);
     		logic.DayTourSearch();
     	}
@@ -954,7 +985,13 @@ public class Main extends javax.swing.JFrame {
     		logic.DayTourSearch();
     	}
     	if (jRadioButton5.isSelected()) {
-    		logic.GetDayToursData().setDepartureTime(jTextField4.getText());
+    		if (jTextField4.getText().isEmpty()) {
+    			logic.GetDayToursData().setDepartureTime("18:30");
+    		}
+    		else {
+    			logic.GetDayToursData().setDepartureTime(jTextField4.getText());
+    		}
+    		
     		logic.GetDayToursData().setSearchBy(4);
     		logic.DayTourSearch();
     	}
@@ -977,10 +1014,16 @@ public class Main extends javax.swing.JFrame {
     	}
     	for(int i=0; i<25; i++) {
     		if(i < logic.GetDayToursData().getTours().length) {
-    			DayToursTable.setValueAt(logic.GetDayToursData().getTours()[i].getName(), i, 0);
-    			DayToursTable.setValueAt(logic.GetDayToursData().getTours()[i].getPrice(), i, 1);
-    			DayToursTable.setValueAt(logic.GetDayToursData().getTours()[i].getDuration(), i, 2);
-    			DayToursTable.setValueAt(logic.GetDayToursData().getTours()[i].getDescription(), i, 3);
+    			String name = logic.GetDayToursData().getTours()[i].getName();
+    			String price = Integer.toString(logic.GetDayToursData().getTours()[i].getPrice());
+    			String duration = logic.GetDayToursData().getTours()[i].getDuration();
+    			String description = logic.GetDayToursData().getTours()[i].getDescription();
+    			String[] rowData = new String[4];
+    			rowData[0] = name;
+    			rowData[1] = price;
+    			rowData[2] = duration;
+    			rowData[3] = description;
+    			model.addRow(rowData);
     		}
     	}
     	
@@ -996,7 +1039,6 @@ public class Main extends javax.swing.JFrame {
     		maxPrice.setText("-1");
     	}
     	logic.HotelSearch(hotelLocation.getText(), arrivalDate.getText(), hotelName.getText(), nights.getSelectedIndex(), stars.getSelectedIndex(), Integer.parseInt(maxPrice.getText()), arr);
-    	logic.DisplayHotelResults();
     	
     	for(int i=0; i < 25; i++) {
     		if(i < logic.GetHotelData().getHotels().length) {

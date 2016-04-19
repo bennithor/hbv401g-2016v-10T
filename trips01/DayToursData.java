@@ -66,6 +66,10 @@ public class DayToursData {
 	}
 	*/
 	
+	public void book(DayTours tour, int adults, int children, String bookingName) {
+		session.bookDayTour(tour, adults, children);
+		session.confirmBookings(bookingName);
+	}
 	
 
 	

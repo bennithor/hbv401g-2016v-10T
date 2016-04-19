@@ -32,30 +32,26 @@ public class TripLogic {
 	}
 	
 	
-	public void GenerateTrip(dayTourSearch.DayTours[] tours, hotelSearch.Hotel[] hotels) {
-		tripData.setTours(tours);
-		tripData.setHotelsToStay(hotels);
-	}
-	
-	public void DisplayHotelResults() {
-		hotelsData.disp();
-		
-	}
-	
 	public DayToursData GetDayToursData() {
 		return toursData;
 	}
 	
-	public void  DisplayDayTourResults() {
-		
+	
+	public void SetSelectedHotel(int i) {
+		tripData.setHotelsToStay(hotelsData.getHotels()[i]);
 	}
 	
-	public void SetSelectedHotel() {
-		
+	public void SetSelectedTours(int i) {
+		tripData.setTours(toursData.getTours()[i]);
 	}
 	
-	public void SetSelectedTours() {
-		
+	
+	public void BookHotel(String bookingName) throws ParseException {
+		hotelsData.book(tripData.getHotelsToStay(), bookingName);
+	}
+	
+	public void BookDayTour(int adults, int children, String bookingName) {
+		toursData.book(tripData.getTours(), adults, children, bookingName);
 	}
 	
 /*
