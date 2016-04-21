@@ -1,0 +1,3 @@
+In order for the code to run properly the HotelSearch.db database file will need to be moved to your 
+C:\Users\Public folder, as the path is hardcoded into the hotel search class DBManager.
+If this is not done, the program will crash since it won't find the database.
