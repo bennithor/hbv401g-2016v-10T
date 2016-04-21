@@ -49,23 +49,6 @@ public class DayToursData {
 	}
 	
 	
-	
-	
-	/*
-	public String findDayTours() {
-		if(location.equalsIgnoreCase("Iceland")) {
-			if(date.equalsIgnoreCase("14.03.16")) {
-				return "Hiking trip";
-			}
-			else if(date.equalsIgnoreCase("15.03.16")) {
-				return "Snowmobile trip";
-			}
-			else return "No trips for that date";
-		}
-		else return "No trips for that location";
-	}
-	*/
-	
 	public void book(DayTours tour, int adults, int children, String bookingName) {
 		session.bookDayTour(tour, adults, children);
 		//session.confirmBookings(bookingName);
